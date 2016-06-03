@@ -28,37 +28,13 @@
   <!-- navigation bar -->
 <div class="container-fluid">
 
-  <nav class="navbar navbar-default navbar-fixed-top navigation">
-    <div class="container-fluid">
-      <a class="navbar-brand"><img class="" src="images/logo.png">   </a>
-      <ul v-if="loggedin" class="nav navbar-nav navbar-right action-list">
-        <ul class="nav pull-right user-actions">
-          <li class="dropdown" id="menuSignUp">
-            <a class="dropdown-toggle" href="#" data-toggle="dropdown" id="navSignUp">Sign Up</a>
-            <div class="dropdown-menu signup-modal" style="padding:17px;">
-              <form class="form" id="formSignUp">
-                <input name="username" id="username" type="text" placeholder="Username">
-                <input name="password" id="password" type="password" placeholder="Password"><br>
-                <button type="button" id="btnLogin" class="btn">Sign Up</button>
-              </form>
-            </div>
-          </li>
-          <li class="dropdown" id="menuLogin">
-            <a class="dropdown-toggle" href="#" data-toggle="dropdown" id="navLogin">Login</a>
-            <div class="dropdown-menu login-modal" style="padding:17px;">
-              <form class="form" id="formLogin">
-                <input name="username" id="username" type="text" placeholder="Username">
-                <input name="password" id="password" type="password" placeholder="Password"><br>
-                <button type="button" id="btnLogin" class="btn">Login</button>
-              </form>
-            </div>
-          </li>
-        </ul>
-      </ul>
-    </div>
-  </nav>
+
+  <user-area></user-area>
 
   <image-feed></image-feed>
+
+
+
 
 </div> <!--  /container fluid-->
 

@@ -1,25 +1,26 @@
-.navigation{
+.navigation {
   background-color: #0288D1;
   height: 40px;
 }
 
-.user-actions li{
+.action-list li {
   display: inline-block;
-
-  a{
+  a {
     color: #fff;
     line-height: 25px;
-    &:hover{
+    &:hover {
       color: #000;
       background-color: #0288D1;
     }
   }
 }
-
+.navbar-default .navbar-nav>li>a {
+  color: #fff;
+}
 
 .login-modal,
-.signup-modal{
-  form input{
+.signup-modal {
+  form input {
     margin: 5px;
   }
 }
