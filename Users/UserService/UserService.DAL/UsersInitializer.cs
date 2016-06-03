@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
-using System.Security.Cryptography;
 using UserService.Models;
+
 using ExtensionMethods;
 
 namespace UserService.DAL
