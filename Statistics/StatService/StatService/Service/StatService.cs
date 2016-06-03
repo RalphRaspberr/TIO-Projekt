@@ -19,9 +19,9 @@ namespace StatService.Service
             return this.statisticsRepository.Add(statistic);
         }
 
-        public List<Statistic> GetAllImageViewStatistics(int id)
+        public List<Statistic> GetAllImageViewStatistics(String id)
         {
-            return this.statisticsRepository.findAllById(id);
+            return this.statisticsRepository.findAllByImageId(id);
         }
 
         public List<Statistic> GetAllViewStatistics()
