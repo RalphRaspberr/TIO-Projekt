@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="">
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>mzl client</title>
+
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <!-- Place favicon.ico in the root directory -->
+
+  <!-- build:css styles/vendor.css -->
+  <!-- bower:css -->
+  <!-- endbower -->
+  <!-- endbuild -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <!-- <link rel="stylesheet" href="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/css/bootstrap.css" integrity="sha384-XXXXXXXX" crossorigin="anonymous"> -->
+  <!-- build:css styles/main.css -->
+  <link rel="stylesheet" href="styles/main.css">
+  <!-- endbuild -->
+
+</head>
+<body>
+  <!--[if lt IE 10]>
+  <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+  <![endif]-->
+
+  <!-- navigation bar -->
+<div class="container-fluid">
+
+  <nav class="navbar navbar-default navbar-fixed-top navigation">
+    <div class="container-fluid">
+      <a class="navbar-brand"><img class="" src="images/logo.png">   </a>
+      <ul v-if="loggedin" class="nav navbar-nav navbar-right action-list">
+        <ul class="nav pull-right user-actions">
+          <li class="dropdown" id="menuSignUp">
+            <a class="dropdown-toggle" href="#" data-toggle="dropdown" id="navSignUp">Sign Up</a>
+            <div class="dropdown-menu signup-modal" style="padding:17px;">
+              <form class="form" id="formSignUp">
+                <input name="username" id="username" type="text" placeholder="Username">
+                <input name="password" id="password" type="password" placeholder="Password"><br>
+                <button type="button" id="btnLogin" class="btn">Sign Up</button>
+              </form>
+            </div>
+          </li>
+          <li class="dropdown" id="menuLogin">
+            <a class="dropdown-toggle" href="#" data-toggle="dropdown" id="navLogin">Login</a>
+            <div class="dropdown-menu login-modal" style="padding:17px;">
+              <form class="form" id="formLogin">
+                <input name="username" id="username" type="text" placeholder="Username">
+                <input name="password" id="password" type="password" placeholder="Password"><br>
+                <button type="button" id="btnLogin" class="btn">Login</button>
+              </form>
+            </div>
+          </li>
+        </ul>
+      </ul>
+    </div>
+  </nav>
+
+  <image-feed></image-feed>
+
+</div> <!--  /container fluid-->
+
+  <!-- main body of our application -->
+
+
+<!-- https://github.com/auth0-blog/vue-jwt-authentication -->
+
+
+
+    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+    <script>
+    (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+      function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+      e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+      e.src='https://www.google-analytics.com/analytics.js';
+      r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+      ga('create','UA-XXXXX-X');ga('send','pageview');
+      </script>
+
+      <!-- build:js scripts/vendor.js -->
+      <!-- bower:js -->
+      <script src="/bower_components/jquery/dist/jquery.js"></script>
+      <!-- endbower -->
+      <!-- endbuild -->
+      <!-- <script src="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/js/bootstrap.js" integrity="sha384-XXXXXXXX" crossorigin="anonymous"></script> -->
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+      <script src="vue.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/0.7.2/vue-resource.js"></script>
+
+      <!-- build:js scripts/main.js -->
+      <script src="scripts/main.js"></script>
+      <!-- endbuild -->
+    </body>
+    </html>

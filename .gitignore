@@ -18,6 +18,9 @@
 [Xx]64/
 [Xx]86/
 [Bb]uild/
+x64/
+x86/
+build/
 bld/
 [Bb]in/
 [Oo]bj/
@@ -81,6 +84,9 @@ ipch/
 *.sdf
 *.cachefile
 *.VC.db
+*.opensdf
+*.sdf
+*.cachefile
 
 # Visual Studio profiler
 *.psess
@@ -144,6 +150,11 @@ publish/
 # your web deploy settings because they may include unencrypted
 # passwords
 #*.pubxml
+## TODO: Comment the next line if you want to checkin your
+## web deploy settings but do note that will include unencrypted
+## passwords
+#*.pubxml
+
 *.publishproj
 
 # NuGet Packages
@@ -172,6 +183,13 @@ ApplicationInsights.config
 # Windows Store app package directory
 AppPackages/
 BundleArtifacts/
+
+# Windows Azure Build Output
+csx/
+*.build.csdef
+
+# Windows Store app package directory
+AppPackages/
 
 # Visual Studio cache files
 # files ending in .cache can be ignored
@@ -243,3 +261,7 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
+# LightSwitch generated files
+GeneratedArtifacts/
+_Pvt_Extensions/
+ModelManifest.xml
