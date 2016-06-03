@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="">
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>mzl client</title>
+
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <!-- Place favicon.ico in the root directory -->
+
+  <!-- build:css styles/vendor.css -->
+  <!-- bower:css -->
+  <!-- endbower -->
+  <!-- endbuild -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <!-- <link rel="stylesheet" href="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/css/bootstrap.css" integrity="sha384-XXXXXXXX" crossorigin="anonymous"> -->
+  <!-- build:css styles/main.css -->
+  <link rel="stylesheet" href="styles/main.css">
+  <!-- endbuild -->
+
+</head>
+<body>
+  <!--[if lt IE 10]>
+  <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+  <![endif]-->
+
+  <!-- navigation bar -->
+
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+      <a class="navbar-brand"><i class="glyphicon glyphicon-bullhorn"></i> Vue Events Bulletin Board</a>
+    </div>
+  </nav>
+
+  <!-- main body of our application -->
+  <div class="container" id="events">
+
+    <!-- add an event form -->
+    <div class="col-sm-6">
+
+
+      <!-- <div class="panel-heading">
+        <h3>Add an Event</h3>
+      </div>
+      <div class="panel-body">
+
+        <div class="form-group">
+          <input class="form-control" placeholder="Event Name" v-model="event.name">
+        </div>
+
+        <div class="form-group">
+          <textarea class="form-control" placeholder="Event Description" v-model="event.description"></textarea>
+        </div>
+
+        <div class="form-group">
+          <input type="date" class="form-control" placeholder="Date" v-model="event.date">
+        </div>
+
+        <button class="btn btn-primary" v-on:click= "addEvent">Submit</button>
+
+      </div> -->
+
+      <!-- show the events -->
+      <!-- <div class="col-sm-6">
+        <div class="list-group">
+
+          <a href="#" class="list-group-item" v-for="event in events">
+            <h4 class="list-group-item-heading">
+              <i class="glyphicon glyphicon-bullhorn"></i>
+              {{ event.name }}
+            </h4>
+
+            <h5>
+              <i class="glyphicon glyphicon-calendar" v-if="event.date"></i>
+              {{ event.date }}
+            </h5>
+
+            <p class="list-group-item-text" v-if="event.description">{{ event.description }}</p>
+
+            <button class="btn btn-xs btn-danger"  v-on:click= "deleteEvent($index)">Delete</button>
+          </a>
+
+        </div>
+      </div> -->
+
+      <!-- <template> -->
+          <div class="col-sm-4 col-sm-offset-4">
+            <h2>Log In</h2>
+            <p>Log in to your account to get some great quotes.</p>
+            <div class="alert alert-danger" v-if="error">
+              <p>{{ error }}</p>
+            </div>
+            <div class="form-group">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Enter your username"
+                v-model="credentials.username"
+              >
+            </div>
+            <div class="form-group">
+              <input
+                type="password"
+                class="form-control"
+                placeholder="Enter your password"
+                v-model="credentials.password"
+              >
+            </div>
+            <button class="btn btn-primary" @click="submit()">Access</button>
+          </div>
+        <!-- </template> -->
+<!-- https://github.com/auth0-blog/vue-jwt-authentication -->
+
+    </div>
+
+
+    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+    <script>
+    (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+      function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+      e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+      e.src='https://www.google-analytics.com/analytics.js';
+      r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+      ga('create','UA-XXXXX-X');ga('send','pageview');
+      </script>
+
+      <!-- build:js scripts/vendor.js -->
+      <!-- bower:js -->
+      <script src="/bower_components/jquery/dist/jquery.js"></script>
+      <!-- endbower -->
+      <!-- endbuild -->
+      <!-- <script src="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/js/bootstrap.js" integrity="sha384-XXXXXXXX" crossorigin="anonymous"></script> -->
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+      <script src="vue.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/0.7.2/vue-resource.js"></script>
+
+      <!-- build:js scripts/main.js -->
+      <script src="scripts/main.js"></script>
+      <!-- endbuild -->
+    </body>
+    </html>
