@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using StatService.Model;
+using StatisticService.Model;
 
-namespace StatService.Repositories
+namespace StatisticService.Repositories
 {
-    public interface IStatisticsRepository
+    public interface StatisticRepository
     {
         List<Statistic> findAll();
         List<Statistic> findAllByImageId(String id);

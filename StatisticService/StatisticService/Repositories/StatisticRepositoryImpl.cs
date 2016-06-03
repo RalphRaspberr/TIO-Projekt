@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using System.Linq;
 using System.Web;
-using StatService.Model;
 using LiteDB;
+using StatisticService.Model;
 
-namespace StatService.Repositories
+namespace StatisticService.Repositories
 {
-    public class StatisticsRepository : IStatisticsRepository
+    public class StatisticRepositoryImpl : StatisticRepository
     {
         private readonly string DatabasePath = "C:\\statistics";
 
