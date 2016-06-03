@@ -1,34 +1,41 @@
 ﻿using System;
 using System.Drawing;
 using System.IO;
+using System.Runtime.Serialization;
 
 namespace ImageService.Models
 {
+    [DataContract]
     public class Graphic
     {
         /// <summary>
         /// Image author ID.
         /// </summary>
+        [DataMember]
         public int Author { get; private set; }
 
         /// <summary>
         /// Image ID.
         /// </summary>
+        [DataMember]
         public string Id { get; private set; }
 
         /// <summary>
         /// Image title.
         /// </summary>
+        [DataMember]
         public string Title { get; private set; }
 
         /// <summary>
         /// Path to the image.
         /// </summary>
+        [DataMember]
         public string Path { get; set; }
 
         /// <summary>
         /// Image object parsed from provided stream.
         /// </summary>
+        [DataMember]
         public Image Image { get; set; }
 
         /// <summary>
