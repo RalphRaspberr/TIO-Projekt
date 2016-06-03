@@ -1,0 +1,25 @@
+.navigation{
+  background-color: #0288D1;
+  height: 40px;
+}
+
+.user-actions li{
+  display: inline-block;
+
+  a{
+    color: #fff;
+    line-height: 25px;
+    &:hover{
+      color: #000;
+      background-color: #0288D1;
+    }
+  }
+}
+
+
+.login-modal,
+.signup-modal{
+  form input{
+    margin: 5px;
+  }
+}
