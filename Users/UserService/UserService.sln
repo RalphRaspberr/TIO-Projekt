@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserService", "UserService\UserService.csproj", "{64EA1D99-58FF-4671-B9DB-7D48EF8A165F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserService.DAL", "UserService.DAL\UserService.DAL.csproj", "{EB88CB38-EFB5-4F76-9FF1-99A5E01E5850}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserService.Models", "UserService.Models\UserService.Models.csproj", "{CA198932-216F-45E2-AEC2-FFB1E558723C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{64EA1D99-58FF-4671-B9DB-7D48EF8A165F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64EA1D99-58FF-4671-B9DB-7D48EF8A165F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64EA1D99-58FF-4671-B9DB-7D48EF8A165F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64EA1D99-58FF-4671-B9DB-7D48EF8A165F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB88CB38-EFB5-4F76-9FF1-99A5E01E5850}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB88CB38-EFB5-4F76-9FF1-99A5E01E5850}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB88CB38-EFB5-4F76-9FF1-99A5E01E5850}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB88CB38-EFB5-4F76-9FF1-99A5E01E5850}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA198932-216F-45E2-AEC2-FFB1E558723C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA198932-216F-45E2-AEC2-FFB1E558723C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA198932-216F-45E2-AEC2-FFB1E558723C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA198932-216F-45E2-AEC2-FFB1E558723C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
