@@ -20,9 +20,9 @@ namespace ImageService
         Graphic GetImage(int user, string id);
 
         [OperationContract]
-        Graphic GetNewestImages(int limit);
+        IEnumerable<Graphic> GetNewestImages(int limit);
 
         [OperationContract]
-        Graphic GetUserImages(int user);
+        IEnumerable<Graphic> GetUserImages(int user);
     }
 }

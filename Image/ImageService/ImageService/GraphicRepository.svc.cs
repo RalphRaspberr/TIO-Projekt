@@ -13,6 +13,7 @@ namespace ImageService
     {
         public string AddImage(Graphic graphic)
         {
+            string path = @"storage" 
             return "";
         }
 
@@ -21,12 +22,12 @@ namespace ImageService
             throw new NotImplementedException();
         }
 
-        public Graphic GetNewestImages(int limit)
+        public IEnumerable<Graphic> GetNewestImages(int limit)
         {
             throw new NotImplementedException();
         }
 
-        public Graphic GetUserImages(int user)
+        public IEnumerable<Graphic> GetUserImages(int user)
         {
             throw new NotImplementedException();
         }
