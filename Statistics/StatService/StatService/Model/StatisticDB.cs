@@ -6,7 +6,7 @@ using System.Net;
 
 namespace StatService.Model
 {
-    public class Statistic
+    public class StatisticDB
     {
         public int Id { get; set; }
         public String ImageId { get; set; }

@@ -19,8 +19,10 @@ namespace StatService.Repositories
             return new StatisticDB()
             {
                 Id = statistic.Id,
+                ImageId = statistic.ImageId,
                 ViewDate = statistic.ViewDate,
-                UserIp = statistic.UserIp
+                UserIp = statistic.UserIp,
+                UserId = statistic.UserId
             };
         }
 
@@ -31,8 +33,10 @@ namespace StatService.Repositories
             return new Statistic()
             {
                 Id = statisticDb.Id,
+                ImageId = statisticDb.ImageId,
                 ViewDate = statisticDb.ViewDate,
-                UserIp = statisticDb.UserIp
+                UserIp = statisticDb.UserIp,
+                UserId = statisticDb.UserId
             };
         }
 
@@ -56,13 +60,13 @@ namespace StatService.Repositories
             }
         }
 
-        public List<Statistic> findAllById(int id)
+        public List<Statistic> findAllByImageId(String imageId)
         {
             using (var database = new LiteDatabase(this.DatabasePath))
             {
                 var repository = database.GetCollection<StatisticDB>("statistics");
                 var allStatistics = findAll();
-                return allStatistics.Where(x => x.Id == id).ToList();
+                return allStatistics.Where(x => x.ImageId.Equals(imageId)).ToList();
             }
         }
     }

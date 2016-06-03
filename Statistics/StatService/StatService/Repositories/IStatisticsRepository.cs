@@ -9,10 +9,8 @@ namespace StatService.Repositories
 {
     public interface IStatisticsRepository
     {
-        List<Statistic> fingAll();
+        List<Statistic> findAll();
+        List<Statistic> findAllByImageId(String id);
         int Add(Statistic statistic);
-        Statistic findOne(int id);
-        Statistic Update(Statistic statistic);
-        bool Delete(int id);
     }
 }
