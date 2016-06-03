@@ -4,9 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Net;
 
-namespace StatService.Model
+namespace StatisticService.Model
 {
-    public class Statistic
+    public class StatisticDB
     {
         public int Id { get; set; }
         public String ImageId { get; set; }

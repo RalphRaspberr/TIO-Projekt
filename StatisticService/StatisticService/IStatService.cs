@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using StatService.Model;
+using System.Runtime.Serialization;
 using System.ServiceModel;
+using System.ServiceModel.Web;
+using System.Text;
+using StatisticService.Model;
 
-namespace StatService.Service
+namespace StatisticService
 {
     [ServiceContract]
     public interface IStatService
@@ -15,9 +15,10 @@ namespace StatService.Service
         int AddStatitics(Statistic statistic);
 
         [OperationContract]
-        List<Statistic> GetAllImageViewStatistics(String id);
+        List<Statistic> GetAllImageViewStatistics(string id);
 
         [OperationContract]
         List<Statistic> GetAllViewStatistics();
     }
 }
+
