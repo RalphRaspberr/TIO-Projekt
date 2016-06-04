@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="45117f38-fb16-4453-80f4-24c56896d547" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:52267/GraphicRepository.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="GraphicRepository.disco" MetadataType="Disco" ID="f222f66b-19bf-4918-acc8-887a8d8023ec" SourceId="1" SourceUrl="http://localhost:52267/GraphicRepository.svc?disco" />
+    <MetadataFile FileName="GraphicRepository.xsd" MetadataType="Schema" ID="fb0d6c4c-6bc3-4dae-8766-b1592f1b69ac" SourceId="1" SourceUrl="http://localhost:52267/GraphicRepository.svc?xsd=xsd2" />
+    <MetadataFile FileName="GraphicRepository1.xsd" MetadataType="Schema" ID="39be6616-94b5-4785-822b-7ad743c6bd88" SourceId="1" SourceUrl="http://localhost:52267/GraphicRepository.svc?xsd=xsd3" />
+    <MetadataFile FileName="GraphicRepository2.xsd" MetadataType="Schema" ID="0afba726-bad8-4098-828f-861789d6acf8" SourceId="1" SourceUrl="http://localhost:52267/GraphicRepository.svc?xsd=xsd0" />
+    <MetadataFile FileName="GraphicRepository3.xsd" MetadataType="Schema" ID="6665ec34-f2a7-4c0d-a3d4-2efd05483182" SourceId="1" SourceUrl="http://localhost:52267/GraphicRepository.svc?xsd=xsd1" />
+    <MetadataFile FileName="GraphicRepository.wsdl" MetadataType="Wsdl" ID="5153f7a9-d284-4368-8018-12104754c5d4" SourceId="1" SourceUrl="http://localhost:52267/GraphicRepository.svc?wsdl" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>
