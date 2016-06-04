@@ -1,11 +1,19 @@
-// define
-var MyComponent = Vue.extend({
-  // template: '<div>A custom component!</div>'
-})
-
-// register
-// Vue.component('my-component', MyComponent)
-
+var ImageViews = Vue.extend({
+  props: [
+    'user-id',
+    'image-id'
+  ],
+  methods: {
+    getViews: function(){
+      this.viewResource.get().then(function (response) {
+          //  this.$set('images', response);
+      });
+    }
+  },
+  ready: function(){
+    this.viewResource = this.$resource('stats{/userId}{/imageId}');
+  }
+});
 
 var UserArea = Vue.extend({
   template: `
@@ -63,14 +71,7 @@ var ImageFeed = Vue.extend({
   template: `
   <ul id="feed-list">
     <li v-for="image in images">
-      <div class="thumbnail">
-        <image-card v-bind:src="image.src"></image-card>
-          <div class="caption">
-            <h3>{{ image.title }}</h3>
-            <p><a v-bind:href="image.authorProfile">{{ image.author }}</a></p>
-            <p class="views">{{ image.views }}</p>
-          </div>
-      </div>
+      <image-card :image="image"></image-card>
     </li>
   </ul>
   `,
@@ -81,29 +82,66 @@ var ImageFeed = Vue.extend({
           src: "https://placekitten.com/g/200/300",
           title: "#kicius",
           author: "Adusia",
+          authorId: 123,
           authorProfile: "#",
+          imageId: 244,
           views: 4
         },
         {
           src: "https://placekitten.com/g/200/200",
           title: "#kicius",
           author: "Adusia",
+          authorId: 123,
           authorProfile: "#",
+          imageId: 2435,
           views: 4
         }
       ]
     }
+  },
+  methods: {
+    getImages: function(){
+      this.imageResource.get().then(function (response) {
+          //  this.$set('images', response);
+      });
+    },
+    getUserImages: function(userId) {
+      this.imageResource.get({userId: userId}).then(function (response) {
+          //  this.$set('images', response);
+      });
+    },
+    getImage: function(userId, imageId){
+      this.imageResource.get({userId: userId, imageId: imageId}).then(function (response) {
+          //  this.$set('images', response);
+      });
+    },
+    addImage: function(image, title, userId){
+      this.imageResource.save({userId: userId}, {image: image, title: title});
+    }
+  },
+  ready: function(){
+    this.imageResource = this.$resource('image{/userId}{/imageId}');
   }
 });
 
 var ImageCard = Vue.extend({
-  template: '<div><img v-bind:src="src"></div>',
+  template: `
+  <div class="thumbnail">
+    <img v-bind:src="image.src">
+    <div class="caption">
+      <h3>{{ image.title }}</h3>
+      <p><a v-bind:href="image.profile">{{ image.author }}</a></p>
+      <image-views user-id="{{ image.authorId }}" image-id="{{ image.imageId }}"></image-views>
+    </div>
+  </div>
+  `,
   props: [
-    'src'
+    'image'
   ]
 })
 
 // register
+Vue.component('image-views', ImageViews);
 Vue.component('image-card', ImageCard);
 Vue.component('image-feed', ImageFeed);
 Vue.component('user-area', UserArea);
