@@ -17,7 +17,9 @@ namespace ImageService
         public string AddImage(Graphic graphic)
         {
             string path = $"storage/{graphic.Author}/{graphic.Id}.jpg";
-            graphic.Image.Save(path, ImageFormat.Jpeg);
+
+            Image img = Image.FromStream(graphic.ImageStream);
+            img.Save(path, ImageFormat.Jpeg);
 
             return path;
         }
