@@ -10,9 +10,10 @@ var MyComponent = Vue.extend({
 var UserArea = Vue.extend({
   template: `
   <nav class="navbar navbar-default navbar-fixed-top navigation">
-    <div class="container-fluid">
-      <a class="navbar-brand"><img class="" src="images/logo.png">   </a>
-      <ul v-if="loggedin" class="nav navbar-nav navbar-right action-list">
+    <div class="container">
+      <a class="navbar-brand"><img class="" src="images/bowl.png"></a>
+      <a class="brand-name" href="#">Leczo</a>
+      <ul v-if="!loggedin" class="nav navbar-nav navbar-right action-list">
         <ul class="nav pull-right user-actions">
           <li class="dropdown" id="menuSignUp">
             <a class="dropdown-toggle" href="#" data-toggle="dropdown" id="navSignUp">Sign Up</a>
@@ -37,7 +38,7 @@ var UserArea = Vue.extend({
         </ul>
       </ul>
 
-      <ul v-if="!loggedin" class="nav navbar-nav navbar-right action-list">
+      <ul v-if="loggedin" class="nav navbar-nav navbar-right action-list">
         <li>
           <a href="{{ userProfile }}" data-toggle="dropdown" id="navSignUp">{{ name }}</a>
         </li>

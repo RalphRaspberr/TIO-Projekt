@@ -20,10 +20,11 @@ body {
 }
 
 .thumbnail{
-  margin: 0 auto;
-  max-width: 400px;
+  margin: 20px auto;
+  max-width: 500px;
+  border-radius: 0;
   img {
-    width: 380px;
+    width: 480px;
     margin: 5px;
     // height: 350px;
     // overflow: hidden;
