@@ -12,19 +12,28 @@ namespace ImageService.Models
         /// Image author ID.
         /// </summary>
         [DataMember]
-        public int Author { get; private set; }
+        public int Author { get; set; }
 
         /// <summary>
         /// Image ID.
         /// </summary>
         [DataMember]
-        public string Id { get; private set; }
+        public string Id { get; set; }
 
         /// <summary>
         /// Image title.
         /// </summary>
+        private string _title;
         [DataMember]
-        public string Title { get; private set; }
+        public string Title
+        {
+            get { return _title; }
+            set
+            {
+                _title = value;
+                Id = generateId(Title);
+            }
+        }
 
         /// <summary>
         /// Path to the image.
@@ -36,7 +45,7 @@ namespace ImageService.Models
         /// Image object parsed from provided stream.
         /// </summary>
         [DataMember]
-        public Image Image { get; set; }
+        public Stream ImageStream { get; set; }
 
         /// <summary>
         /// Creates graphic model based on user ID, image title and stream.
@@ -48,7 +57,7 @@ namespace ImageService.Models
         /// <param name="stream"></param>
         public Graphic(int author, string title, Stream stream)
         {
-            this.Image = Image.FromStream(stream);
+            this.ImageStream = stream;
             this.Author = author;
             this.Title = title;
             this.Id = this.generateId(title);
