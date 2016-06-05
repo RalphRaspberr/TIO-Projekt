@@ -39,7 +39,7 @@ var UserArea = Vue.extend({
           <li class="dropdown" id="menuLogin">
             <a class="dropdown-toggle" href="#" data-toggle="dropdown" id="navLogin">Login</a>
             <div class="dropdown-menu login-modal" style="padding:17px;">
-              <form class="form" id="formLogin">
+              <form class="form" id="formLogin" v-on:submit.prevent="login">
                 <input name="username" id="username" type="text" placeholder="Username" v-model="userName">
                 <input name="password" id="password" type="password" placeholder="Password" v-model="password"><br>
                 <button type="submit" id="btnLogin" class="btn">Login</button>
@@ -50,6 +50,9 @@ var UserArea = Vue.extend({
       </ul>
 
       <ul v-if="loggedin" class="nav navbar-nav navbar-right action-list">
+        <li>
+          <button type="submit" class="btn">Logout</button>
+        </li>
         <li>
           <a href="{{ userProfile }}" data-toggle="dropdown" id="navSignUp">{{ name }}</a>
         </li>
@@ -91,8 +94,8 @@ var UserArea = Vue.extend({
     }
   },
   ready: function(){
-    this.accountResource = this.$resource('api/Account{/accountAction}');
-    this.tokenResource = this.$resource('api/Token');
+    this.accountResource = this.$resource('http://localhost:57146/api/Account{/accountAction}');
+    this.tokenResource = this.$resource('http://localhost:57146/Token');
     const token = sessionStorage.getItem('token');
     if(token){
       Vue.http.headers.common['Authorization'] = `Bearer ${token}`;
@@ -154,7 +157,7 @@ var ImageFeed = Vue.extend({
     }
   },
   ready: function(){
-    this.imageResource = this.$resource('image{/userId}{/imageId}');
+    this.imageResource = this.$resource('http://localhost:57146/image{/userId}{/imageId}');
   }
 });
 
