@@ -9,7 +9,7 @@ using System.Text.RegularExpressions;
 
 namespace ImageService
 {
-    [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single)]
+    [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single, IncludeExceptionDetailInFaults = true)]
     public class GraphicRepository : IGraphicRepository
     {
         public string AddImage(Graphic graphic)
@@ -51,7 +51,7 @@ namespace ImageService
         public IEnumerable<Graphic> GetNewestImages(int limit)
         {
             List<Graphic> graphics = new List<Graphic>();
-            string[] files = Directory.GetFiles(@"storage/", "*.*", SearchOption.AllDirectories);
+            string[] files = Directory.GetFiles(@"~/storage/", "*.*", SearchOption.AllDirectories);
 
             string authorBase64;
             byte[] authorBytes;
@@ -62,7 +62,7 @@ namespace ImageService
             string title;
             foreach (string file in files)
             {
-                Match match = Regex.Match(file, @"/storage/([^/]+)/([^\.]+)$", RegexOptions.IgnoreCase);
+                Match match = Regex.Match(file, @"storage/([^/]+)/([^\.]+)$", RegexOptions.IgnoreCase);
 
                 // Here we check the Match instance.
                 if (match.Success)
@@ -96,7 +96,7 @@ namespace ImageService
             byte[] authorBytes = System.Text.Encoding.UTF8.GetBytes(author);
             string authorBase64 = System.Convert.ToBase64String(authorBytes);
 
-            string[] files = Directory.GetFiles($"storage/{authorBase64}/", "*.*");
+            string[] files = Directory.GetFiles($"~/storage/{authorBase64}/", "*.*");
 
             byte[] titleBytes;
             string titleBase64;
@@ -106,7 +106,7 @@ namespace ImageService
 
             foreach (string file in files)
             {
-                Match match = Regex.Match(file, $"/storage/{authorBase64}/([^\\.]+)$", RegexOptions.IgnoreCase);
+                Match match = Regex.Match(file, $"storage/{authorBase64}/([^\\.]+)$", RegexOptions.IgnoreCase);
 
                 if (match.Success)
                 {
