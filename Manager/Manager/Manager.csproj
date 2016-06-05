@@ -292,9 +292,6 @@
     <Content Include="Service References\GraphicRepository\Manager.GraphicRepository.Graphic.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <None Include="Service References\GraphicRepository\GraphicRepository4.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Service References\GraphicRepository\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
@@ -336,9 +333,6 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <None Include="Service References\GraphicRepository\GraphicRepository.wsdl" />
     <None Include="Service References\GraphicRepository\GraphicRepository.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\GraphicRepository\GraphicRepository1.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\GraphicRepository\GraphicRepository2.xsd">

@@ -22,13 +22,11 @@
     <MetadataSource Address="http://localhost:52267/GraphicRepository.svc" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="GraphicRepository.disco" MetadataType="Disco" ID="f222f66b-19bf-4918-acc8-887a8d8023ec" SourceId="1" SourceUrl="http://localhost:52267/GraphicRepository.svc?disco" />
-    <MetadataFile FileName="GraphicRepository.xsd" MetadataType="Schema" ID="fb0d6c4c-6bc3-4dae-8766-b1592f1b69ac" SourceId="1" SourceUrl="http://localhost:52267/GraphicRepository.svc?xsd=xsd2" />
-    <MetadataFile FileName="GraphicRepository1.xsd" MetadataType="Schema" ID="39be6616-94b5-4785-822b-7ad743c6bd88" SourceId="1" SourceUrl="http://localhost:52267/GraphicRepository.svc?xsd=xsd3" />
     <MetadataFile FileName="GraphicRepository2.xsd" MetadataType="Schema" ID="0afba726-bad8-4098-828f-861789d6acf8" SourceId="1" SourceUrl="http://localhost:52267/GraphicRepository.svc?xsd=xsd0" />
+    <MetadataFile FileName="GraphicRepository.disco" MetadataType="Disco" ID="f222f66b-19bf-4918-acc8-887a8d8023ec" SourceId="1" SourceUrl="http://localhost:52267/GraphicRepository.svc?disco" />
     <MetadataFile FileName="GraphicRepository3.xsd" MetadataType="Schema" ID="6665ec34-f2a7-4c0d-a3d4-2efd05483182" SourceId="1" SourceUrl="http://localhost:52267/GraphicRepository.svc?xsd=xsd1" />
     <MetadataFile FileName="GraphicRepository.wsdl" MetadataType="Wsdl" ID="5153f7a9-d284-4368-8018-12104754c5d4" SourceId="1" SourceUrl="http://localhost:52267/GraphicRepository.svc?wsdl" />
-    <MetadataFile FileName="GraphicRepository4.xsd" MetadataType="Schema" ID="5417cb27-1337-4a1d-a40d-8e2dcde1515e" SourceId="1" SourceUrl="http://localhost:52267/GraphicRepository.svc?xsd=xsd4" />
+    <MetadataFile FileName="GraphicRepository.xsd" MetadataType="Schema" ID="fb0d6c4c-6bc3-4dae-8766-b1592f1b69ac" SourceId="1" SourceUrl="http://localhost:52267/GraphicRepository.svc?xsd=xsd2" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

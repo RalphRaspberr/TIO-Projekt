@@ -67,7 +67,7 @@ namespace Manager.Controllers
                 var postedFile = httpRequest.Files[0];
                 if (postedFile.ContentLength > 0)
                 {
-                    int MaxContentLength = 1024 * 1024 * 1; //Size = 10 MB
+                    int MaxContentLength = 1024 * 1024 * 10; //Size = 10 MB
 
                     IList<string> AllowedFileExtensions = new List<string> { ".jpg", ".gif", ".png", ".jpeg" };
 
@@ -90,7 +90,7 @@ namespace Manager.Controllers
                         {
                             Title = httpRequest.Form["Title"],
                             Author = httpRequest.Form["Author"],
-                            ImageStream = postedFile.InputStream
+                            Bytes = postedFile.InputStream.ReadFully()
                         };
                         _log.addLog($"ImagesController: added image: Title = {imgToAdd.Title}, Author = {imgToAdd.Author} ",LogLevel.INFO);
                         _repo.AddImage(imgToAdd);
@@ -111,6 +111,25 @@ namespace Manager.Controllers
         {
             public string authorName;
             public string imageId;
+        }
+
+      
+    }
+
+    public static class Extensions
+    {
+        public static byte[] ReadFully(this Stream input)
+        {
+            byte[] buffer = new byte[10 * 1024 * 1024];
+            using (MemoryStream ms = new MemoryStream())
+            {
+                int read;
+                while ((read = input.Read(buffer, 0, buffer.Length)) > 0)
+                {
+                    ms.Write(buffer, 0, read);
+                }
+                return ms.ToArray();
+            }
         }
     }
 }

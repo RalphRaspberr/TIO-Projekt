@@ -26,10 +26,10 @@ namespace Manager.GraphicRepository {
         private string AuthorField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string IdField;
+        private byte[] BytesField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.IO.Stream ImageStreamField;
+        private string IdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string PathField;
@@ -61,6 +61,19 @@ namespace Manager.GraphicRepository {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public byte[] Bytes {
+            get {
+                return this.BytesField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.BytesField, value) != true)) {
+                    this.BytesField = value;
+                    this.RaisePropertyChanged("Bytes");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public string Id {
             get {
                 return this.IdField;
@@ -69,19 +82,6 @@ namespace Manager.GraphicRepository {
                 if ((object.ReferenceEquals(this.IdField, value) != true)) {
                     this.IdField = value;
                     this.RaisePropertyChanged("Id");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.IO.Stream ImageStream {
-            get {
-                return this.ImageStreamField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.ImageStreamField, value) != true)) {
-                    this.ImageStreamField = value;
-                    this.RaisePropertyChanged("ImageStream");
                 }
             }
         }

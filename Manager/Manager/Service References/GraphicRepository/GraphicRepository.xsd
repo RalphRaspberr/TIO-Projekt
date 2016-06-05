@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/ImageService.Models" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/ImageService.Models" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="http://localhost:52267/GraphicRepository.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/System.IO" />
   <xs:complexType name="Graphic">
     <xs:sequence>
       <xs:element minOccurs="0" name="Author" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Bytes" nillable="true" type="xs:base64Binary" />
       <xs:element minOccurs="0" name="Id" nillable="true" type="xs:string" />
-      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/System.IO" minOccurs="0" name="ImageStream" nillable="true" type="q1:Stream" />
       <xs:element minOccurs="0" name="Path" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Title" nillable="true" type="xs:string" />
     </xs:sequence>
