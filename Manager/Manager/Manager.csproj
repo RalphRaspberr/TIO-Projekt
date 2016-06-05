@@ -341,19 +341,10 @@
     <None Include="Service References\GraphicRepository\GraphicRepository3.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\StaticticsRepository\StatisticsService.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\StaticticsRepository\StatisticsService1.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Service References\StaticticsRepository\StatisticsService2.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\StaticticsRepository\StatisticsService3.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\StaticticsRepository\StatisticsService4.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\StaticticsRepository\StatisticsService5.xsd">

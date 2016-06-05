@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="6963f634-a17a-41dc-ad4d-a52c28928391" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="b93a114d-f6c7-4acd-a5f2-3cf3322a02c3" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -22,7 +22,7 @@
     <MetadataSource Address="http://localhost:50816/LoggerService.svc?singleWsdl" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="LoggerService.wsdl" MetadataType="Wsdl" ID="58b45e81-d282-4868-ade3-a774f4b806ad" SourceId="1" SourceUrl="http://localhost:50816/LoggerService.svc?singleWsdl" />
+    <MetadataFile FileName="LoggerService.wsdl" MetadataType="Wsdl" ID="e784f64e-66dc-4586-937f-87b346bc6e63" SourceId="1" SourceUrl="http://localhost:50816/LoggerService.svc?singleWsdl" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

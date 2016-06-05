@@ -16,7 +16,6 @@ namespace StatisticService.Model
         public String ImageId { get; set; }
         [DataMember]
         public DateTime ViewDate { get; set; }
-        [DataMember]
-        public int UserId { get; set; }
+
     }   
 }

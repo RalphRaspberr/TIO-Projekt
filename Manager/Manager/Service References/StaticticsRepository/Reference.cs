@@ -29,12 +29,6 @@ namespace Manager.StaticticsRepository {
         private string ImageIdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int UserIdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Net.IPAddress UserIpField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.DateTime ViewDateField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
@@ -69,32 +63,6 @@ namespace Manager.StaticticsRepository {
                 if ((object.ReferenceEquals(this.ImageIdField, value) != true)) {
                     this.ImageIdField = value;
                     this.RaisePropertyChanged("ImageId");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int UserId {
-            get {
-                return this.UserIdField;
-            }
-            set {
-                if ((this.UserIdField.Equals(value) != true)) {
-                    this.UserIdField = value;
-                    this.RaisePropertyChanged("UserId");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Net.IPAddress UserIp {
-            get {
-                return this.UserIpField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.UserIpField, value) != true)) {
-                    this.UserIpField = value;
-                    this.RaisePropertyChanged("UserIp");
                 }
             }
         }

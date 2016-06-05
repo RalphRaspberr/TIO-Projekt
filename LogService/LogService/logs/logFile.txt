@@ -18,3 +18,15 @@
 2016-06-05 22:28:03.0680|INFO|LogService.LoggerService|ImagesController: added image: Title = dupeczka, Author = undefined 
 2016-06-05 22:28:27.0915|INFO|LogService.LoggerService|ImagesController: added image: Title = dupeczka, Author = undefined 
 2016-06-05 22:32:31.1641|INFO|LogService.LoggerService|ImagesController: added image: Title = dup///eczka, Author = undefined 
+2016-06-05 22:49:37.6083|INFO|LogService.LoggerService|ImagesController: GET was called - GET: api/Images/?authorName=&imageId=
+2016-06-05 22:57:44.9892|INFO|LogService.LoggerService|ImagesController: GET was called - GET: api/Images/?limit=10
+2016-06-05 23:02:11.1168|INFO|LogService.LoggerService|ImagesController: GET was called - GET: api/Images/?limit=10
+2016-06-05 23:04:34.8041|INFO|LogService.LoggerService|ImagesController: GET was called - GET: api/Images/?limit=10
+2016-06-05 23:06:44.1424|INFO|LogService.LoggerService|ImagesController: GET was called - GET: api/Images/?limit=10
+2016-06-05 23:06:46.9750|INFO|LogService.LoggerService|ImagesController: GET was called - GET: api/Images/?limit=10
+2016-06-05 23:07:48.5580|INFO|LogService.LoggerService|ImagesController: GET was called - GET: api/Images/?limit=10
+2016-06-05 23:14:29.1204|INFO|LogService.LoggerService|ImagesController: GET was called - GET: api/Images/?limit=10
+2016-06-05 23:15:06.6860|INFO|LogService.LoggerService|ImagesController: added image: Title = dup///eczka, Author = undefined 
+2016-06-05 23:19:42.2953|INFO|LogService.LoggerService|ImagesController: GET was called - GET: api/Images/?limit=1
+2016-06-05 23:19:46.3379|INFO|LogService.LoggerService|ImagesController: GET was called - GET: api/Images/?limit=10
+2016-06-05 23:19:53.8676|INFO|LogService.LoggerService|ImagesController: GET was called - GET: api/Images/?authorName=&imageId=
