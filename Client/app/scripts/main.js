@@ -85,6 +85,9 @@ var UserArea = Vue.extend({
         Email: this.userName + '@leczo.io',
         Password: this.password,
         ConfirmPassword: this.password
+      }).then(function(){
+        this.login();
+
       });
       console.log(this.userName, this.password);
     },
@@ -163,7 +166,8 @@ var ImageFeed = Vue.extend({
   methods: {
     getImages: function(){
       this.imageResource.get().then(function (response) {
-          //  this.$set('images', response);
+            console.log(response.data);
+           this.$set('images', response.data);
       });
     },
     getUserImages: function(userId) {
