@@ -23,9 +23,7 @@ var UserArea = Vue.extend({
       <a class="brand-name" href="#">Leczo</a>
       <ul v-if="!loggedin" class="nav navbar-nav navbar-right action-list">
         <ul class="nav pull-right user-actions">
-          <li>
-            <button type="submit" class="usun-konto" v-on:click="">USUŃ KONTO ( ͡° ͜ʖ ͡°)</button
-            </li>
+
           <li class="dropdown" id="menuSignUp">
             <a class="dropdown-toggle" href="#" data-toggle="dropdown" id="navSignUp">Sign Up</a>
             <div class="dropdown-menu signup-modal" style="padding:17px;">
@@ -54,6 +52,9 @@ var UserArea = Vue.extend({
           <button type="submit" class="btn">Logout</button>
         </li>
         <li>
+          <button type="submit" class="usun-konto" v-on:click="">USUŃ KONTO ( ͡° ͜ʖ ͡°)</button
+        </li>
+        <li>
           <a href="{{ userProfile }}" data-toggle="dropdown" id="navSignUp">{{ name }}</a>
         </li>
       </ul>
@@ -76,15 +77,16 @@ var UserArea = Vue.extend({
       console.log(this.userName, this.password);
     },
     login: function(){
+      Vue.http.options.emulateJSON = true;
       this.tokenResource.save({}, {
         grant_type: 'password',
-        username: this.userName,
+        username: this.userName + '@leczo.io',
         password: this.password
       }).then(function(response){
-        console.log(response);
         Vue.http.headers.common['Authorization'] = `Bearer ${response.access_token}`;
         sessionStorage.setItem('token', response.access_token);
       });
+      Vue.http.options.emulateJSON = false;
     },
     removeAccount: function(){
       this.accountResource.save({},{});
