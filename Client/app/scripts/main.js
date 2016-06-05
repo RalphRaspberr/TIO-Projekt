@@ -23,6 +23,9 @@ var UserArea = Vue.extend({
       <a class="brand-name" href="#">Leczo</a>
       <ul v-if="!loggedin" class="nav navbar-nav navbar-right action-list">
         <ul class="nav pull-right user-actions">
+          <li>
+            <button type="submit" class="usun-konto" v-on:click="">USUŃ KONTO ( ͡° ͜ʖ ͡°)</button
+            </li>
           <li class="dropdown" id="menuSignUp">
             <a class="dropdown-toggle" href="#" data-toggle="dropdown" id="navSignUp">Sign Up</a>
             <div class="dropdown-menu signup-modal" style="padding:17px;">
@@ -62,16 +65,39 @@ var UserArea = Vue.extend({
   },
   methods: {
     register: function(){
-      this.registerResource.save({}, {
+      this.accountResource.save({accountAction: 'Register'}, {
         Email: this.userName + '@leczo.io',
         Password: this.password,
         ConfirmPassword: this.password
       });
       console.log(this.userName, this.password);
+    },
+    login: function(){
+      this.tokenResource.save({}, {
+        grant_type: 'password',
+        username: this.userName,
+        password: this.password
+      }).then(function(response){
+        console.log(response);
+        Vue.http.headers.common['Authorization'] = `Bearer ${response.access_token}`;
+        sessionStorage.setItem('token', response.access_token);
+      });
+    },
+    removeAccount: function(){
+      this.accountResource.save({},{});
+    },
+    logout: function(){
+       sessionStorage.removeItem(token);
     }
   },
   ready: function(){
-    this.registerResource = this.$resource('api/Account');
+    this.accountResource = this.$resource('api/Account{/accountAction}');
+    this.tokenResource = this.$resource('api/Token');
+    const token = sessionStorage.getItem('token');
+    if(token){
+      Vue.http.headers.common['Authorization'] = `Bearer ${token}`;
+      loggedin = true;
+    }
   }
 });
 
