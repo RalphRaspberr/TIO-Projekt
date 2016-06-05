@@ -3,23 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Net;
+using System.Runtime.Serialization;
 
 namespace StatisticService.Model
 {
+    [DataContract]
     public class Statistic
     {
-        public int Id { get; }
+        [DataMember]
+        public int Id { get; set; }
+        [DataMember]
         public String ImageId { get; set; }
+        [DataMember]
         public DateTime ViewDate { get; set; }
-        public IPAddress UserIp { get; set; }
+        [DataMember]
         public int UserId { get; set; }
-
-        public Statistic(String imageId, DateTime viewDate, IPAddress userIp, int userId)
-        {
-            this.ImageId = imageId;
-            this.ViewDate = viewDate;
-            this.UserIp = userIp;
-            this.UserId = UserId;
-        }
     }   
 }
