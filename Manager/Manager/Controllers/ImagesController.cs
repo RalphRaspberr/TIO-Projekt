@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -56,34 +57,74 @@ namespace Manager.Controllers
         [Authorize]
         public HttpResponseMessage PostFormData()
         {
-            _log.addLog($"ImagesController: GET was called - GET: api/Images", LogLevel.INFO);
-            var httpRequest = HttpContext.Current.Request;
-            if (httpRequest.Files.Count > 0)
+            try
             {
+                var httpRequest = HttpContext.Current.Request;
+
                 foreach (string file in httpRequest.Files)
                 {
-                    Graphic imgToAdd = new Graphic()
+                    HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created);
+
+                    var postedFile = httpRequest.Files[file];
+                    if (postedFile != null && postedFile.ContentLength > 0)
                     {
-                        Title = httpRequest.Form["Title"],
-                        Author = Int32.Parse(httpRequest.Form["AuthorId"]),
-                        ImageStream = httpRequest.Files[0].InputStream
-                    };
-                    _repo.AddImage(imgToAdd);
-                    _log.addLog("ImagesController: new image added to the repository: " +
-                               $"Id={imgToAdd.Id} , Title={imgToAdd.Title}, Author={imgToAdd.Author}", LogLevel.INFO);
+                        int MaxContentLength = 1024 * 1024 * 1; //Size = 10 MB
+
+                        IList<string> AllowedFileExtensions = new List<string> { ".jpg", ".gif", ".png" };
+                        var ext = postedFile.FileName.Substring(postedFile.FileName.LastIndexOf('.'));
+                        var extension = ext.ToLower();
+                        if (!AllowedFileExtensions.Contains(extension))
+                        {                           
+                            _log.addLog("ImagesController: attempt to add file that is not an image of type .jpg, .gif, or .png", LogLevel.ERROR);
+                            var message = "Please Upload image of type .jpg,.gif,.png.";
+                            return Request.CreateResponse(HttpStatusCode.BadRequest, message);
+                        }
+                        else if (postedFile.ContentLength > MaxContentLength)
+                        {
+                            var message = "Please Upload a file upto 10 MB.";
+                            return Request.CreateResponse(HttpStatusCode.BadRequest, message);
+                        }
+                        else
+                        {
+                            var imgToAdd = new Graphic()
+                            {
+                                Title = httpRequest.Form["Title"],
+                                Author = httpRequest.Form["Author"],
+                                ImageStream = httpRequest.Form["Image"].ToStream()
+                            };
+                            _repo.AddImage(imgToAdd);
+                        }
+                    }
+
+                    var message1 = string.Format("Image Updated Successfully.");
+                    return Request.CreateErrorResponse(HttpStatusCode.Created, message1); ;
                 }
-
-                return Request.CreateResponse(HttpStatusCode.Created);
+                var res = string.Format("Please Upload a image.");
+                return Request.CreateResponse(HttpStatusCode.NotFound, res);
             }
-
-            _log.addLog("ImagesController: POST was called - GET: api/Images , but there was no files in HTTP request.", LogLevel.ERROR);
-            return Request.CreateResponse(HttpStatusCode.BadRequest);
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.NotFound, ex.Message);
+            }
         }
 
         public class ImageAndItsAuthor
         {
             public int userId;
             public string imageId;
+        }
+    }
+
+    public static class Extensions
+    {
+        public static Stream ToStream(this object str)
+        {
+            MemoryStream stream = new MemoryStream();
+            StreamWriter writer = new StreamWriter(stream);
+            writer.Write(str);
+            writer.Flush();
+            stream.Position = 0;
+            return stream;
         }
     }
 }
