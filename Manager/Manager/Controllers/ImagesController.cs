@@ -33,7 +33,9 @@ namespace Manager.Controllers
             return _repo.GetUserImages(userId);
         }
 
+
         // POST: api/Images
+        [Authorize]
         public HttpResponseMessage PostFormData()
         {         
             var httpRequest = HttpContext.Current.Request;
