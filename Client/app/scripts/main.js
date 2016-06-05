@@ -18,7 +18,7 @@ var ImageViews = Vue.extend({
 var UserArea = Vue.extend({
   template: `
   <nav class="navbar navbar-default navbar-fixed-top navigation">
-    <div class="container">
+    <div class="container-fluid">
       <a class="navbar-brand"><img class="" src="images/bowl.png"></a>
       <a class="brand-name" href="#">Leczo</a>
       <ul v-if="!loggedin" class="nav navbar-nav navbar-right action-list">
@@ -48,8 +48,18 @@ var UserArea = Vue.extend({
       </ul>
 
       <ul v-if="loggedin" class="nav navbar-nav navbar-right action-list">
+        <li class="dropdown" id="addPicture">
+          <a class="dropdown-toggle addPic" href="#" data-toggle="dropdown" id="navLogin">Add Picture</a>
+          <div class="dropdown-menu login-modal" style="padding:17px;">
+            <form class="form" id="uploadForm" v-on:submit.prevent="addPicture">
+              <input name="title" id="title" type="text" placeholder="Title" v-model="title">
+              <input name="picture" id="picture" type="file" placeholder="Password" v-el:picture accept="image/gif, image/jpeg, image/png"><br>
+              <button type="submit" id="addPicBtn" class="btn">Submit</button>
+            </form>
+          </div>
+          </li>
         <li>
-          <button type="submit" class="btn">Logout</button>
+          <button type="submit" class="btn btnLogout" v-on:click="logout">Logout</button>
         </li>
         <li>
           <button type="submit" class="usun-konto" v-on:click="">USUŃ KONTO ( ͡° ͜ʖ ͡°)</button
@@ -64,7 +74,10 @@ var UserArea = Vue.extend({
   data: function() {
     return {
       userName: '',
-      password: ''
+      password: '',
+      loggedin: false,
+      title: '',
+      author: ''
     }
   },
   methods: {
@@ -83,8 +96,10 @@ var UserArea = Vue.extend({
         username: this.userName + '@leczo.io',
         password: this.password
       }).then(function(response){
-        Vue.http.headers.common['Authorization'] = `Bearer ${response.access_token}`;
-        sessionStorage.setItem('token', response.access_token);
+        Vue.http.headers.common['Authorization'] = `Bearer ${response.data.access_token}`;
+        sessionStorage.setItem('token', response.data.access_token);
+        this.$set('loggedin', true);
+        this.$set('author', this.username)
       });
       Vue.http.options.emulateJSON = false;
     },
@@ -92,16 +107,25 @@ var UserArea = Vue.extend({
       this.accountResource.save({},{});
     },
     logout: function(){
-       sessionStorage.removeItem(token);
+       sessionStorage.removeItem('token');
+       this.$set('loggedin', false);
+    },
+    addPicture: function(){
+      const formData = new FormData();
+      formData.append('Picture', this.$els.picture.files[0]);
+      formData.append('Title', this.title);
+      formData.append('Author', this.author)
+      this.imageResource.save({}, formData);
     }
   },
   ready: function(){
+    this.imageResource = this.$resource('http://localhost:57146/api/Images');
     this.accountResource = this.$resource('http://localhost:57146/api/Account{/accountAction}');
     this.tokenResource = this.$resource('http://localhost:57146/Token');
     const token = sessionStorage.getItem('token');
     if(token){
       Vue.http.headers.common['Authorization'] = `Bearer ${token}`;
-      loggedin = true;
+      this.$set('loggedin', true);
     }
   }
 });
@@ -177,7 +201,7 @@ var ImageCard = Vue.extend({
   props: [
     'image'
   ]
-})
+});
 
 // register
 Vue.component('image-views', ImageViews);

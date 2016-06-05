@@ -37,7 +37,18 @@ body {
 .usun-konto{
   background-color: #C62828;
   color: #fff;
-  border-radius: 15px;
+  height: 55px;
+  // border-radius: 15px;
   padding: 10px;
   border: none;
+}
+
+.btnLogout{
+  height: 55px;
+  border-radius: 0;
+  line-height: 26px;
+}
+
+#addPicture .addPic{
+  line-height: 26px;
 }
