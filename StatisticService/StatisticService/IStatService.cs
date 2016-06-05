@@ -15,10 +15,10 @@ namespace StatisticService
         int AddStatitics(Statistic statistic);
 
         [OperationContract]
-        List<Statistic> GetAllImageViewStatistics(string id);
+        IEnumerable<Statistic> FindImageStats(string imageId, string authorName );
 
         [OperationContract]
-        List<Statistic> GetAllViewStatistics();
+        List<Statistic> FindAll();
     }
 }
 

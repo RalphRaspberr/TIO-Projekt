@@ -12,10 +12,14 @@ namespace StatisticService.Model
     {
         [DataMember]
         public int Id { get; set; }
+
         [DataMember]
         public String ImageId { get; set; }
+
         [DataMember]
         public DateTime ViewDate { get; set; }
 
+        [DataMember]
+        public string Author { get; set; }
     }   
 }

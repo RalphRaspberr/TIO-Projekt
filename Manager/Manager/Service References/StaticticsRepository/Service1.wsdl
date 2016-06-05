@@ -13,30 +13,30 @@
   <wsdl:message name="IStatService_AddStatitics_OutputMessage">
     <wsdl:part name="parameters" element="tns:AddStatiticsResponse" />
   </wsdl:message>
-  <wsdl:message name="IStatService_GetAllImageViewStatistics_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetAllImageViewStatistics" />
+  <wsdl:message name="IStatService_FindImageStats_InputMessage">
+    <wsdl:part name="parameters" element="tns:FindImageStats" />
   </wsdl:message>
-  <wsdl:message name="IStatService_GetAllImageViewStatistics_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetAllImageViewStatisticsResponse" />
+  <wsdl:message name="IStatService_FindImageStats_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FindImageStatsResponse" />
   </wsdl:message>
-  <wsdl:message name="IStatService_GetAllViewStatistics_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetAllViewStatistics" />
+  <wsdl:message name="IStatService_FindAll_InputMessage">
+    <wsdl:part name="parameters" element="tns:FindAll" />
   </wsdl:message>
-  <wsdl:message name="IStatService_GetAllViewStatistics_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetAllViewStatisticsResponse" />
+  <wsdl:message name="IStatService_FindAll_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FindAllResponse" />
   </wsdl:message>
   <wsdl:portType name="IStatService">
     <wsdl:operation name="AddStatitics">
       <wsdl:input wsaw:Action="http://tempuri.org/IStatService/AddStatitics" message="tns:IStatService_AddStatitics_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IStatService/AddStatiticsResponse" message="tns:IStatService_AddStatitics_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="GetAllImageViewStatistics">
-      <wsdl:input wsaw:Action="http://tempuri.org/IStatService/GetAllImageViewStatistics" message="tns:IStatService_GetAllImageViewStatistics_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IStatService/GetAllImageViewStatisticsResponse" message="tns:IStatService_GetAllImageViewStatistics_OutputMessage" />
+    <wsdl:operation name="FindImageStats">
+      <wsdl:input wsaw:Action="http://tempuri.org/IStatService/FindImageStats" message="tns:IStatService_FindImageStats_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IStatService/FindImageStatsResponse" message="tns:IStatService_FindImageStats_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="GetAllViewStatistics">
-      <wsdl:input wsaw:Action="http://tempuri.org/IStatService/GetAllViewStatistics" message="tns:IStatService_GetAllViewStatistics_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IStatService/GetAllViewStatisticsResponse" message="tns:IStatService_GetAllViewStatistics_OutputMessage" />
+    <wsdl:operation name="FindAll">
+      <wsdl:input wsaw:Action="http://tempuri.org/IStatService/FindAll" message="tns:IStatService_FindAll_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IStatService/FindAllResponse" message="tns:IStatService_FindAll_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IStatService" type="tns:IStatService">
@@ -50,8 +50,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetAllImageViewStatistics">
-      <soap:operation soapAction="http://tempuri.org/IStatService/GetAllImageViewStatistics" style="document" />
+    <wsdl:operation name="FindImageStats">
+      <soap:operation soapAction="http://tempuri.org/IStatService/FindImageStats" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -59,8 +59,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetAllViewStatistics">
-      <soap:operation soapAction="http://tempuri.org/IStatService/GetAllViewStatistics" style="document" />
+    <wsdl:operation name="FindAll">
+      <soap:operation soapAction="http://tempuri.org/IStatService/FindAll" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

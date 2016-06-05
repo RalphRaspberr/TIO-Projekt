@@ -17,52 +17,76 @@ using WebGrease.Css.Extensions;
 
 namespace Manager.Controllers
 {
+    [RoutePrefix("api/Images")]
     public class ImagesController : ApiController
     {
         private GraphicRepositoryClient _repo = new GraphicRepositoryClient();
         private LoggerServiceClient _log = new LoggerServiceClient();
         private StatServiceClient stats = new StatServiceClient();
 
+        // GET: api/Images
+        [HttpGet]
+        [Route("")]
+        public IEnumerable<Graphic> GetImages()
+        {
+            _log.addLog($"ImagesController: GET was called - GET: api/Images", LogLevel.INFO);
+
+            //Default 10 images
+            var newestTenImages = _repo.GetNewestImages(10);
+            //Add statistics
+            newestTenImages?.ForEach(i => AddStats(i.Id, i.Author));
+
+            return newestTenImages;
+        }
+
         // GET: api/Images/?limit=10
-        public IEnumerable<Graphic> GetNewestImages([FromUri] int limit)
+        [HttpGet]
+        [Route("{limit}")]
+        public IEnumerable<Graphic> GetNewestImages(int limit)
         {
             _log.addLog($"ImagesController: GET was called - GET: api/Images/?limit={limit}", LogLevel.INFO);
 
             var newestImages = _repo.GetNewestImages(limit);
             //Add statistics
-            newestImages?.ForEach(i => AddStats(i.Id));
+            newestImages?.ForEach(i => AddStats(i.Id, i.Author));
 
             return newestImages;
         }
 
         // GET: api/Images/?authorName=10&imageId=abc
-        public Graphic GetAuthorsImage([FromUri] ImageAndItsAuthor img)
+        [HttpGet]
+        [Route("{authorName}/{imageId}")]
+        public Graphic GetAuthorsImage(string authorName, string imageId)
         {
-            _log.addLog($"ImagesController: GET was called - GET: api/Images/?authorName={img.authorName}&imageId={img.imageId}", LogLevel.INFO);
+            _log.addLog($"ImagesController: GET was called - GET: api/Images/?authorName={authorName}&imageId={imageId}", LogLevel.INFO);
 
-            var authorsImage = _repo.GetUserImages(img.authorName).First(i => i.Id == img.imageId);
+            var authorsImage = _repo.GetUserImages(authorName).First(i => i.Id == imageId);
 
             // Add statistics   
             if (authorsImage != null)
             {                
-                AddStats(authorsImage.Id);
+                AddStats(authorsImage.Id, authorsImage.Author);
             }
             return authorsImage;       
         }
 
-        // GET: api/Images/?authorName=10
-        public IEnumerable<Graphic> GetAuthorImages([FromUri] string authorName)
+        // GET: api/Images/?authorName=Ada
+        [HttpGet]
+        [Route("{authorName}")]
+        public IEnumerable<Graphic> GetAuthorImages( string authorName)
         {
             _log.addLog($"ImagesController: GET was called - GET: api/Images/?authorName={authorName}", LogLevel.INFO);
 
             var authorsImages = _repo.GetUserImages(authorName);
             //Add statistics
-            authorsImages?.ForEach(i => AddStats(i.Id));
+            authorsImages?.ForEach(i => AddStats(i.Id, i.Author));
             
             return authorsImages;
         }
 
         // POST: api/Images
+        [HttpPost]
+        [Route("")]
         [Authorize]
         public HttpResponseMessage PostFormData()
         {
@@ -116,19 +140,19 @@ namespace Manager.Controllers
 
         public class ImageAndItsAuthor
         {
-            public string authorName;
-            public string imageId;
+            public string AuthorName;
+            public string ImageId;
         }
 
-        private void AddStats(string imgId)
+        private void AddStats(string imageId, string author)
         {
             stats.AddStatitics(new Statistic()
             {
-                ImageId = imgId,
+                ImageId = imageId,
+                Author = author,
                 ViewDate = DateTime.Now
             });
-        }
-      
+        }     
     }
 
     public static class Extensions
