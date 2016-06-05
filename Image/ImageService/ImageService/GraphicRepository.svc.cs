@@ -59,7 +59,6 @@ namespace ImageService
             List<Graphic> graphics = new List<Graphic>();
             string currentDirectory = System.AppDomain.CurrentDomain.BaseDirectory;
             string[] files = Directory.GetFiles(currentDirectory + @"\storage\", "*.*", SearchOption.AllDirectories);
-
             string authorBase64;
             byte[] authorBytes;
             string author;
@@ -69,56 +68,48 @@ namespace ImageService
             string title;
             foreach (string file in files)
             {
-                Match match = Regex.Match(file, "storage\\([^/]+)\\([^\\.]+)$", RegexOptions.IgnoreCase);
+                authorBase64 = Path.GetFileName(Path.GetDirectoryName(file));
+                titleBase64 = Path.GetFileNameWithoutExtension(file);
 
-                if (match.Success)
-                {
-                    authorBase64 = match.Groups[1].Value;
-                    titleBase64 = match.Groups[2].Value;
+                authorBytes = System.Convert.FromBase64String(authorBase64);
+                author = System.Text.Encoding.UTF8.GetString(authorBytes);
 
-                    authorBytes = System.Convert.FromBase64String(authorBase64);
-                    author = System.Text.Encoding.UTF8.GetString(authorBytes);
+                titleBytes = System.Convert.FromBase64String(titleBase64);
+                title = System.Text.Encoding.UTF8.GetString(titleBytes);
 
-                    titleBytes = System.Convert.FromBase64String(titleBase64);
-                    title = System.Text.Encoding.UTF8.GetString(titleBytes);
+                path = $"storage/{authorBase64}/{titleBase64}.jpg";
 
-                    path = $"storage/{authorBase64}/{titleBase64}.jpg";
-                    graphics.Add(new Graphic(author, title, titleBase64, path));
-                }
+                graphics.Add(new Graphic(author, title, titleBase64, path)); 
 
                 if (graphics.Count >= limit)
                 {
                     break;
                 }
             }
-
             return graphics;
         }
 
         public IEnumerable<Graphic> GetUserImages(string author)
         {
             List<Graphic> graphics = new List<Graphic>();
-
-            byte[] authorBytes = System.Text.Encoding.UTF8.GetBytes(author);
-            string authorBase64 = System.Convert.ToBase64String(authorBytes);
-
-            string currentDirectory = System.AppDomain.CurrentDomain.BaseDirectory;
-
-            string[] files = Directory.GetFiles(currentDirectory + $"\\storage\\{authorBase64}\\", "*.*");
-
-            byte[] titleBytes;
-            string titleBase64;
-            string title;
-
-            string path;
-
-            foreach (string file in files)
+            if(author != null)
             {
-                Match match = Regex.Match(file, $"storage\\{authorBase64}\\([^\\.]+)$", RegexOptions.IgnoreCase);
+                byte[] authorBytes = System.Text.Encoding.UTF8.GetBytes(author);
+                string authorBase64 = System.Convert.ToBase64String(authorBytes);
 
-                if (match.Success)
+                string currentDirectory = System.AppDomain.CurrentDomain.BaseDirectory;
+
+                string[] files = Directory.GetFiles(currentDirectory + $"\\storage\\{authorBase64}\\", "*.*");
+
+                byte[] titleBytes;
+                string titleBase64;
+                string title;
+
+                string path;
+
+                foreach (string file in files)
                 {
-                    titleBase64 = match.Groups[1].Value;
+                    titleBase64 = Path.GetFileNameWithoutExtension(file);
                     titleBytes = System.Convert.FromBase64String(titleBase64);
                     title = System.Text.Encoding.UTF8.GetString(titleBytes);
                     path = $"storage/{authorBase64}/{titleBase64}.jpg";

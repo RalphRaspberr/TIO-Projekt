@@ -27,18 +27,17 @@ namespace Manager.Controllers
         {
             _log.addLog($"ImagesController: GET was called - GET: api/Images/?limit={limit}", LogLevel.INFO);
             var newestImages = _repo.GetNewestImages(limit);
-            if (newestImages != null)
-            {
-                foreach (var img in newestImages)
-                {
-                    stats.AddStatitics(new Statistic()
-                    {
-                        ImageId = img.Id,
-                        ViewDate = new DateTime.Now(),
-                        Author = img.Author
-                    });
-                }
-            }
+            //foreach (var img in newestImages)
+            //{
+            //    stats.AddStatitics(new Statistic()
+            //    {
+            //        ImageId = img.Id,
+            //        UserId = img.Author,
+                    
+            //        //UserIp = Request.Headers.Host
+            //    });
+            //}
+
             return newestImages;
         }
 
@@ -46,37 +45,14 @@ namespace Manager.Controllers
         public Graphic GetAuthorsImage([FromUri] ImageAndItsAuthor img)
         {
             _log.addLog($"ImagesController: GET was called - GET: api/Images/?authorName={img.authorName}&imageId={img.imageId}", LogLevel.INFO);
-            var authorsImage = _repo.GetUserImages(img.authorName).First(i => i.Id == img.imageId);
-            if (authorsImage != null)
-            {
-                stats.AddStatitics(new Statistic()
-                {
-                    ImageId = img.Id,
-                    ViewDate = new DateTime.Now(),
-                    Author = img.Author
-                });
-            }
-            return authorsImage;       
+            return _repo.GetUserImages(img.authorName).First(i => i.Id == img.imageId);          
         }
 
         // GET: api/Images/?authorName=10
         public IEnumerable<Graphic> GetAuthorImages([FromUri] string authorName)
         {
             _log.addLog($"ImagesController: GET was called - GET: api/Images/?authorName={authorName}", LogLevel.INFO);
-            var authorsImages = _repo.GetUserImages(authorName);
-            if (authorsImages != null)
-            {
-                foreach (var img in newestImages)
-                {
-                    stats.AddStatitics(new Statistic()
-                    {
-                        ImageId = img.Id,
-                        ViewDate = new DateTime.Now(),
-                        Author = img.Author
-                    });
-                }
-            }
-            return authorsImages;
+            return _repo.GetUserImages(authorName);
         }
 
         // POST: api/Images
