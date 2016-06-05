@@ -17,12 +17,12 @@ namespace ImageService
         string AddImage(Graphic graphic);
 
         [OperationContract]
-        Graphic GetImage(int user, string id);
+        Graphic GetImage(string author, string id);
 
         [OperationContract]
         IEnumerable<Graphic> GetNewestImages(int limit);
 
         [OperationContract]
-        IEnumerable<Graphic> GetUserImages(int user);
+        IEnumerable<Graphic> GetUserImages(string author);
     }
 }
