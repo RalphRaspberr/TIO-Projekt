@@ -18,7 +18,7 @@ var ImageViews = Vue.extend({
 var UserArea = Vue.extend({
   template: `
   <nav class="navbar navbar-default navbar-fixed-top navigation">
-    <div class="container-fluid">
+    <div class="container">
       <a class="navbar-brand"><img class="" src="images/bowl.png"></a>
       <a class="brand-name" href="#">Leczo</a>
       <ul v-if="!loggedin" class="nav navbar-nav navbar-right action-list">
@@ -76,8 +76,7 @@ var UserArea = Vue.extend({
       userName: '',
       password: '',
       loggedin: false,
-      title: '',
-      author: ''
+      title: ''
     }
   },
   methods: {
@@ -99,7 +98,6 @@ var UserArea = Vue.extend({
         Vue.http.headers.common['Authorization'] = `Bearer ${response.data.access_token}`;
         sessionStorage.setItem('token', response.data.access_token);
         this.$set('loggedin', true);
-        this.$set('author', this.username)
       });
       Vue.http.options.emulateJSON = false;
     },
@@ -114,7 +112,7 @@ var UserArea = Vue.extend({
       const formData = new FormData();
       formData.append('Picture', this.$els.picture.files[0]);
       formData.append('Title', this.title);
-      formData.append('Author', this.author)
+      formData.append('Author', this.userName);
       this.imageResource.save({}, formData);
     }
   },
