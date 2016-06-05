@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
@@ -24,65 +27,89 @@ namespace Manager.Controllers
         {
             _log.addLog($"ImagesController: GET was called - GET: api/Images/?limit={limit}", LogLevel.INFO);
             var newestImages = _repo.GetNewestImages(limit);
-            foreach (var img in newestImages)
-            {
-                stats.AddStatitics(new Statistic()
-                {
-                    ImageId = img.Id,
-                    UserId = img.Author,
-                    //UserIp = Request.Headers.Host
-                });
-            }
+            //foreach (var img in newestImages)
+            //{
+            //    stats.AddStatitics(new Statistic()
+            //    {
+            //        ImageId = img.Id,
+            //        UserId = img.Author,
+                    
+            //        //UserIp = Request.Headers.Host
+            //    });
+            //}
 
             return newestImages;
         }
 
-        // GET: api/Images/?userId=10&imageId=abc
+        // GET: api/Images/?authorName=10&imageId=abc
         public Graphic GetAuthorsImage([FromUri] ImageAndItsAuthor img)
         {
-            _log.addLog($"ImagesController: GET was called - GET: api/Images/?userId={img.userId}&imageId={img.imageId}", LogLevel.INFO);
-            return _repo.GetUserImages(img.userId).First(i => i.Id == img.imageId);          
+            _log.addLog($"ImagesController: GET was called - GET: api/Images/?authorName={img.authorName}&imageId={img.imageId}", LogLevel.INFO);
+            return _repo.GetUserImages(img.authorName).First(i => i.Id == img.imageId);          
         }
 
-        // GET: api/Images/?userId=10
-        public IEnumerable<Graphic> GetAuthorImages([FromUri] int userId)
+        // GET: api/Images/?authorName=10
+        public IEnumerable<Graphic> GetAuthorImages([FromUri] string authorName)
         {
-            _log.addLog($"ImagesController: GET was called - GET: api/Images/?userId={userId}", LogLevel.INFO);
-            return _repo.GetUserImages(userId);
+            _log.addLog($"ImagesController: GET was called - GET: api/Images/?authorName={authorName}", LogLevel.INFO);
+            return _repo.GetUserImages(authorName);
         }
-
 
         // POST: api/Images
         [Authorize]
         public HttpResponseMessage PostFormData()
         {
-            _log.addLog($"ImagesController: GET was called - GET: api/Images", LogLevel.INFO);
-            var httpRequest = HttpContext.Current.Request;
-            if (httpRequest.Files.Count > 0)
+            try
             {
-                foreach (string file in httpRequest.Files)
+                var httpRequest = HttpContext.Current.Request;
+                HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created);
+
+                var postedFile = httpRequest.Files[0];
+                if (postedFile.ContentLength > 0)
                 {
-                    Graphic imgToAdd = new Graphic()
+                    int MaxContentLength = 1024 * 1024 * 1; //Size = 10 MB
+
+                    IList<string> AllowedFileExtensions = new List<string> { ".jpg", ".gif", ".png", ".jpeg" };
+
+                    var ext = postedFile.FileName.Substring(postedFile.FileName.LastIndexOf('.'));
+                    var extension = ext.ToLower();
+
+                    if (!AllowedFileExtensions.Contains(extension))
+                    {                           
+                        _log.addLog("ImagesController: attempt to add file that is not an image of extension .jpg, .gif, or .png", LogLevel.ERROR);
+                        return Request.CreateResponse(HttpStatusCode.BadRequest, "Please Upload image of type .jpg,.gif,.png.");
+                    }
+                    else if (postedFile.ContentLength > MaxContentLength)
                     {
-                        Title = httpRequest.Form["Title"],
-                        Author = Int32.Parse(httpRequest.Form["AuthorId"]),
-                        ImageStream = httpRequest.Files[0].InputStream
-                    };
-                    _repo.AddImage(imgToAdd);
-                    _log.addLog("ImagesController: new image added to the repository: " +
-                               $"Id={imgToAdd.Id} , Title={imgToAdd.Title}, Author={imgToAdd.Author}", LogLevel.INFO);
+                        _log.addLog("ImagesController: attempt to add file that is greater than 10MB", LogLevel.ERROR);
+                        return Request.CreateResponse(HttpStatusCode.BadRequest, "Please Upload a file upto 10 MB.");
+                    }
+                    else
+                    {
+                        var imgToAdd = new Graphic()
+                        {
+                            Title = httpRequest.Form["Title"],
+                            Author = httpRequest.Form["Author"],
+                            ImageStream = postedFile.InputStream
+                        };
+                        _log.addLog($"ImagesController: added image: Title = {imgToAdd.Title}, Author = {imgToAdd.Author} ",LogLevel.INFO);
+                        _repo.AddImage(imgToAdd);
+                    }
+                    var message1 = "Image Updated Successfully.";
+                    return Request.CreateErrorResponse(HttpStatusCode.Created, message1);
                 }
-
-                return Request.CreateResponse(HttpStatusCode.Created);
+                var res = "Please Upload a image.";
+                return Request.CreateResponse(HttpStatusCode.NotFound, res);
             }
-
-            _log.addLog("ImagesController: POST was called - GET: api/Images , but there was no files in HTTP request.", LogLevel.ERROR);
-            return Request.CreateResponse(HttpStatusCode.BadRequest);
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.NotFound, ex.Message);
+            }
         }
 
         public class ImageAndItsAuthor
         {
-            public int userId;
+            public string authorName;
             public string imageId;
         }
     }
