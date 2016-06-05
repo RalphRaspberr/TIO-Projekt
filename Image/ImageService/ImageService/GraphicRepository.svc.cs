@@ -6,6 +6,7 @@ using ImageService.Models;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Text.RegularExpressions;
+using System.Reflection;
 
 namespace ImageService
 {
@@ -16,12 +17,15 @@ namespace ImageService
         {
             byte[] authorBytes = System.Text.Encoding.UTF8.GetBytes(graphic.Author);
             string authorBase64 = System.Convert.ToBase64String(authorBytes);
-            string path = $"storage/{authorBase64}/{graphic.Id}.jpg";
+            string path = $"storage\\{authorBase64}\\{graphic.Id}.jpg";
+            string currentDirectory = System.AppDomain.CurrentDomain.BaseDirectory;
+            Directory.CreateDirectory(currentDirectory + $"\\storage");
+            Directory.CreateDirectory(currentDirectory + $"\\storage\\{authorBase64}");
 
             Image img = Image.FromStream(new MemoryStream(graphic.Bytes));
-            img.Save(path, ImageFormat.Jpeg);
+            img.Save(currentDirectory + "\\" + path, ImageFormat.Jpeg);
 
-            return path;
+            return $"\\storage\\{authorBase64}\\{graphic.Id}.jpg";
         }
 
         /// <summary>
@@ -31,7 +35,7 @@ namespace ImageService
         /// <param name="id">Image ID.</param>
         /// <returns>Graphic model.</returns>
         public Graphic GetImage(string author, string id)
-        {  
+        {
             byte[] titleBytes = System.Convert.FromBase64String(id);
             string title = System.Text.Encoding.UTF8.GetString(titleBytes);
 
@@ -40,7 +44,7 @@ namespace ImageService
 
             string path = $"storage/{authorBase64}/{id}.jpg";
 
-            if(File.Exists(path))
+            if(File.Exists("~/" + path))
             {
                 return new Graphic(author, title, id, path);
             }

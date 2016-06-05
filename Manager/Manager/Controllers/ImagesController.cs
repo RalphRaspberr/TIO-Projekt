@@ -73,6 +73,7 @@ namespace Manager.Controllers
 
                     var ext = postedFile.FileName.Substring(postedFile.FileName.LastIndexOf('.'));
                     var extension = ext.ToLower();
+                    string path = "";
 
                     if (!AllowedFileExtensions.Contains(extension))
                     {                           
@@ -93,10 +94,9 @@ namespace Manager.Controllers
                             Bytes = postedFile.InputStream.ReadFully()
                         };
                         _log.addLog($"ImagesController: added image: Title = {imgToAdd.Title}, Author = {imgToAdd.Author} ",LogLevel.INFO);
-                        _repo.AddImage(imgToAdd);
+                        path = _repo.AddImage(imgToAdd);
                     }
-                    var message1 = "Image Updated Successfully.";
-                    return Request.CreateErrorResponse(HttpStatusCode.Created, message1);
+                    return Request.CreateErrorResponse(HttpStatusCode.Created, path);
                 }
                 var res = "Please Upload a image.";
                 return Request.CreateResponse(HttpStatusCode.NotFound, res);
