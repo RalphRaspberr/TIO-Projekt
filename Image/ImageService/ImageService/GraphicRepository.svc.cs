@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.ServiceModel;
-using System.Web;
 using ImageService.Models;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -16,7 +14,9 @@ namespace ImageService
     {
         public string AddImage(Graphic graphic)
         {
-            string path = $"storage/{graphic.Author}/{graphic.Id}.jpg";
+            byte[] authorBytes = System.Text.Encoding.UTF8.GetBytes(graphic.Author);
+            string authorBase64 = System.Convert.ToBase64String(authorBytes);
+            string path = $"storage/{authorBase64}/{graphic.Id}.jpg";
 
             Image img = Image.FromStream(graphic.ImageStream);
             img.Save(path, ImageFormat.Jpeg);
@@ -24,13 +24,28 @@ namespace ImageService
             return path;
         }
 
-        public Graphic GetImage(int author, string id)
-        {
-            string path = $"storage/{author}/{id}.jpg";
+        /// <summary>
+        /// Returns Graphic model based on author name and image ID.
+        /// </summary>
+        /// <param name="author">Author name.</param>
+        /// <param name="id">Image ID.</param>
+        /// <returns>Graphic model.</returns>
+        public Graphic GetImage(string author, string id)
+        {  
             byte[] titleBytes = System.Convert.FromBase64String(id);
             string title = System.Text.Encoding.UTF8.GetString(titleBytes);
 
-            return new Graphic(author, title, id, path);
+            byte[] authorBytes = System.Text.Encoding.UTF8.GetBytes(author);
+            string authorBase64 = System.Convert.ToBase64String(authorBytes);
+
+            string path = $"storage/{authorBase64}/{id}.jpg";
+
+            if(File.Exists(path))
+            {
+                return new Graphic(author, title, id, path);
+            }
+
+            return null;
         }
 
         public IEnumerable<Graphic> GetNewestImages(int limit)
@@ -38,24 +53,31 @@ namespace ImageService
             List<Graphic> graphics = new List<Graphic>();
             string[] files = Directory.GetFiles(@"storage/", "*.*", SearchOption.AllDirectories);
 
-            int author;
+            string authorBase64;
+            byte[] authorBytes;
+            string author;
             string path;
-            string id;
+            string titleBase64;
             byte[] titleBytes;
             string title;
             foreach (string file in files)
             {
-                Match match = Regex.Match(file, @"/storage/([^/] +)/([^\.] +)$", RegexOptions.IgnoreCase);
+                Match match = Regex.Match(file, @"/storage/([^/]+)/([^\.]+)$", RegexOptions.IgnoreCase);
 
                 // Here we check the Match instance.
                 if (match.Success)
                 {
-                    author = int.Parse(match.Groups[1].Value);
-                    id = match.Groups[2].Value;
-                    titleBytes = System.Convert.FromBase64String(id);
+                    authorBase64 = match.Groups[1].Value;
+                    titleBase64 = match.Groups[2].Value;
+
+                    authorBytes = System.Convert.FromBase64String(authorBase64);
+                    author = System.Text.Encoding.UTF8.GetString(authorBytes);
+
+                    titleBytes = System.Convert.FromBase64String(titleBase64);
                     title = System.Text.Encoding.UTF8.GetString(titleBytes);
-                    path = $"storage/{author}/{id}.jpg";
-                    graphics.Add(new Graphic(author, title, id, path));
+
+                    path = $"storage/{authorBase64}/{titleBase64}.jpg";
+                    graphics.Add(new Graphic(author, title, titleBase64, path));
                 }
 
                 if (graphics.Count >= limit)
@@ -67,27 +89,32 @@ namespace ImageService
             return graphics;
         }
 
-        public IEnumerable<Graphic> GetUserImages(int author)
+        public IEnumerable<Graphic> GetUserImages(string author)
         {
             List<Graphic> graphics = new List<Graphic>();
-            string[] files = Directory.GetFiles($"storage/{author}/", "*.*", SearchOption.AllDirectories);
+
+            byte[] authorBytes = System.Text.Encoding.UTF8.GetBytes(author);
+            string authorBase64 = System.Convert.ToBase64String(authorBytes);
+
+            string[] files = Directory.GetFiles($"storage/{authorBase64}/", "*.*");
+
+            byte[] titleBytes;
+            string titleBase64;
+            string title;
 
             string path;
-            string id;
-            byte[] titleBytes;
-            string title;
+
             foreach (string file in files)
             {
-                Match match = Regex.Match(file, @"/storage/([^/] +)/([^\.] +)$", RegexOptions.IgnoreCase);
+                Match match = Regex.Match(file, $"/storage/{authorBase64}/([^\\.]+)$", RegexOptions.IgnoreCase);
 
-                // Here we check the Match instance.
                 if (match.Success)
                 {
-                    id = match.Groups[2].Value;
-                    titleBytes = System.Convert.FromBase64String(id);
+                    titleBase64 = match.Groups[1].Value;
+                    titleBytes = System.Convert.FromBase64String(titleBase64);
                     title = System.Text.Encoding.UTF8.GetString(titleBytes);
-                    path = $"storage/{author}/{id}.jpg";
-                    graphics.Add(new Graphic(author, title, id, path));
+                    path = $"storage/{authorBase64}/{titleBase64}.jpg";
+                    graphics.Add(new Graphic(author, title, titleBase64, path));
                 }
             }
 

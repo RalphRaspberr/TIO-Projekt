@@ -12,7 +12,7 @@ namespace ImageService.Models
         /// Image author ID.
         /// </summary>
         [DataMember]
-        public int Author { get; set; }
+        public string Author { get; set; }
 
         /// <summary>
         /// Image ID.
@@ -55,7 +55,7 @@ namespace ImageService.Models
         /// <param name="author"></param>
         /// <param name="title"></param>
         /// <param name="stream"></param>
-        public Graphic(int author, string title, Stream stream)
+        public Graphic(string author, string title, Stream stream)
         {
             this.ImageStream = stream;
             this.Author = author;
@@ -71,7 +71,7 @@ namespace ImageService.Models
         /// <param name="title"></param>
         /// <param name="id"></param>
         /// <param name="path"></param>
-        public Graphic(int author, string title, string id, string path)
+        public Graphic(string author, string title, string id, string path)
         {
             this.Author = author;
             this.Title = title;
