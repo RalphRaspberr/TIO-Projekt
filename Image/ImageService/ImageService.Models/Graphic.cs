@@ -5,6 +5,7 @@ using System.Runtime.Serialization;
 
 namespace ImageService.Models
 {
+    [Serializable]
     [DataContract]
     public class Graphic
     {
