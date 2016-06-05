@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Web;
 using LiteDB;
 using StatisticService.Model;
 
 namespace StatisticService.Repositories
 {
+    [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerCall)]
     public class StatisticRepository : IStatisticRepository
     {
         private readonly string DatabasePath = "C:\\statistics";
@@ -19,8 +21,7 @@ namespace StatisticService.Repositories
             {
                 Id = statistic.Id,
                 ImageId = statistic.ImageId,
-                ViewDate = statistic.ViewDate,
-                UserId = statistic.UserId
+                ViewDate = statistic.ViewDate
             };
         }
 
@@ -32,8 +33,7 @@ namespace StatisticService.Repositories
             {
                 Id = statisticDb.Id,
                 ImageId = statisticDb.ImageId,
-                ViewDate = statisticDb.ViewDate,
-                UserId = statisticDb.UserId
+                ViewDate = statisticDb.ViewDate
             };
         }
 

@@ -11,6 +11,5 @@ namespace StatisticService.Model
         public int Id { get; set; }
         public String ImageId { get; set; }
         public DateTime ViewDate { get; set; }
-        public int UserId { get; set; }
     }
 }
