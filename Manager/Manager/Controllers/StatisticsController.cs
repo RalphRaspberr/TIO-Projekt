@@ -17,9 +17,9 @@ namespace Manager.Controllers
         [HttpGet]
         [Route]
         [Route("{authorName}/{imageId}")]
-        public IEnumerable<Statistic> Get(string authorName, string imageId)
+        public int Get(string authorName, string imageId)
         {
-            return _stats.FindImageStats(imageId, authorName);
+            return _stats.FindImageStats(imageId, authorName).Length;
         }
     }
 }
