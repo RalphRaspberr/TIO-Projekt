@@ -71,8 +71,8 @@
   <ItemGroup>
     <Compile Include="Model\Statistic.cs" />
     <Compile Include="Model\StatisticDB.cs" />
+    <Compile Include="Repositories\IStatisticRepository.cs" />
     <Compile Include="Repositories\StatisticRepository.cs" />
-    <Compile Include="Repositories\StatisticRepositoryImpl.cs" />
     <Compile Include="StatisticsService.svc.cs">
       <DependentUpon>StatisticsService.svc</DependentUpon>
     </Compile>
