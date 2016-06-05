@@ -13,6 +13,7 @@ using System.Web.Http;
 using Manager.GraphicRepository;
 using Manager.LoggingService;
 using Manager.StaticticsRepository;
+using WebGrease.Css.Extensions;
 
 namespace Manager.Controllers
 {
@@ -26,19 +27,11 @@ namespace Manager.Controllers
         public IEnumerable<Graphic> GetNewestImages([FromUri] int limit)
         {
             _log.addLog($"ImagesController: GET was called - GET: api/Images/?limit={limit}", LogLevel.INFO);
+
             var newestImages = _repo.GetNewestImages(limit);
-            if (newestImages != null)
-            {
-                foreach (var img in newestImages)
-                {
-                    stats.AddStatitics(new Statistic()
-                    {
-                        ImageId = img.Id,
-                        ViewDate = new DateTime.Now(),
-                        Author = img.Author
-                    });
-                }
-            }
+            //Add statistics
+            newestImages?.ForEach(i => AddStats(i.Id));
+
             return newestImages;
         }
 
@@ -46,15 +39,13 @@ namespace Manager.Controllers
         public Graphic GetAuthorsImage([FromUri] ImageAndItsAuthor img)
         {
             _log.addLog($"ImagesController: GET was called - GET: api/Images/?authorName={img.authorName}&imageId={img.imageId}", LogLevel.INFO);
+
             var authorsImage = _repo.GetUserImages(img.authorName).First(i => i.Id == img.imageId);
+
+            // Add statistics   
             if (authorsImage != null)
-            {
-                stats.AddStatitics(new Statistic()
-                {
-                    ImageId = img.Id,
-                    ViewDate = new DateTime.Now(),
-                    Author = img.Author
-                });
+            {                
+                AddStats(authorsImage.Id);
             }
             return authorsImage;       
         }
@@ -63,19 +54,11 @@ namespace Manager.Controllers
         public IEnumerable<Graphic> GetAuthorImages([FromUri] string authorName)
         {
             _log.addLog($"ImagesController: GET was called - GET: api/Images/?authorName={authorName}", LogLevel.INFO);
+
             var authorsImages = _repo.GetUserImages(authorName);
-            if (authorsImages != null)
-            {
-                foreach (var img in newestImages)
-                {
-                    stats.AddStatitics(new Statistic()
-                    {
-                        ImageId = img.Id,
-                        ViewDate = new DateTime.Now(),
-                        Author = img.Author
-                    });
-                }
-            }
+            //Add statistics
+            authorsImages?.ForEach(i => AddStats(i.Id));
+            
             return authorsImages;
         }
 
@@ -137,6 +120,14 @@ namespace Manager.Controllers
             public string imageId;
         }
 
+        private void AddStats(string imgId)
+        {
+            stats.AddStatitics(new Statistic()
+            {
+                ImageId = imgId,
+                ViewDate = DateTime.Now
+            });
+        }
       
     }
 
@@ -156,4 +147,6 @@ namespace Manager.Controllers
             }
         }
     }
+
+
 }
