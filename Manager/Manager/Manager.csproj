@@ -209,7 +209,6 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ImagesController.cs" />
-    <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -220,6 +219,11 @@
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
     <Compile Include="Service References\GraphicRepository\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\LoggingService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -283,9 +287,16 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <None Include="Service References\LoggingService\configuration91.svcinfo" />
+    <None Include="Service References\LoggingService\configuration.svcinfo" />
+    <None Include="Service References\LoggingService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="Service References\StaticticsRepository\Manager.StaticticsRepository.Statistic.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <None Include="Service References\LoggingService\LoggerService.wsdl" />
     <None Include="Service References\StaticticsRepository\Service1.wsdl" />
     <None Include="Service References\StaticticsRepository\StatisticsService.disco" />
     <None Include="Service References\StaticticsRepository\configuration91.svcinfo" />
@@ -357,6 +368,7 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\GraphicRepository\" />
+    <WCFMetadataStorage Include="Service References\LoggingService\" />
     <WCFMetadataStorage Include="Service References\StaticticsRepository\" />
   </ItemGroup>
   <PropertyGroup>

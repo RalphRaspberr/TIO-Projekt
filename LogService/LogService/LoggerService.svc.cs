@@ -9,6 +9,7 @@ using System.Text;
 
 namespace LogService
 {
+    [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerCall)]
     public class LoggerService : ILoggerService
     {
         private static readonly Logger logger = LogManager.GetCurrentClassLogger();

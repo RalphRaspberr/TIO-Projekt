@@ -69,7 +69,6 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
     <Compile Include="LogLevel.cs" />
     <Compile Include="LoggerService.svc.cs">
       <DependentUpon>LoggerService.svc</DependentUpon>

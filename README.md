@@ -32,4 +32,4 @@
 
 ## Architecture diagram
 
-<img src="https://raw.githubusercontent.com/RalphRaspberr/TIO-Projekt/master/diagram_v0.2.png">
+<img src="https://raw.githubusercontent.com/RalphRaspberr/TIO-Projekt/master/diagram_v0.4.png">
