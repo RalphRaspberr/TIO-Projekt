@@ -1,0 +1,1 @@
+2016-06-05 19:33:29.1131|ERROR|LogService.LoggerService|ImagesController: attempt to add file that is not an image of type .jpg, .gif, or .png

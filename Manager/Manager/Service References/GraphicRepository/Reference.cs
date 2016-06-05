@@ -23,7 +23,7 @@ namespace Manager.GraphicRepository {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int AuthorField;
+        private string AuthorField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string IdField;
@@ -48,12 +48,12 @@ namespace Manager.GraphicRepository {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Author {
+        public string Author {
             get {
                 return this.AuthorField;
             }
             set {
-                if ((this.AuthorField.Equals(value) != true)) {
+                if ((object.ReferenceEquals(this.AuthorField, value) != true)) {
                     this.AuthorField = value;
                     this.RaisePropertyChanged("Author");
                 }
@@ -133,10 +133,10 @@ namespace Manager.GraphicRepository {
         System.Threading.Tasks.Task<string> AddImageAsync(Manager.GraphicRepository.Graphic graphic);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGraphicRepository/GetImage", ReplyAction="http://tempuri.org/IGraphicRepository/GetImageResponse")]
-        Manager.GraphicRepository.Graphic GetImage(int user, string id);
+        Manager.GraphicRepository.Graphic GetImage(string author, string id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGraphicRepository/GetImage", ReplyAction="http://tempuri.org/IGraphicRepository/GetImageResponse")]
-        System.Threading.Tasks.Task<Manager.GraphicRepository.Graphic> GetImageAsync(int user, string id);
+        System.Threading.Tasks.Task<Manager.GraphicRepository.Graphic> GetImageAsync(string author, string id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGraphicRepository/GetNewestImages", ReplyAction="http://tempuri.org/IGraphicRepository/GetNewestImagesResponse")]
         Manager.GraphicRepository.Graphic[] GetNewestImages(int limit);
@@ -145,10 +145,10 @@ namespace Manager.GraphicRepository {
         System.Threading.Tasks.Task<Manager.GraphicRepository.Graphic[]> GetNewestImagesAsync(int limit);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGraphicRepository/GetUserImages", ReplyAction="http://tempuri.org/IGraphicRepository/GetUserImagesResponse")]
-        Manager.GraphicRepository.Graphic[] GetUserImages(int user);
+        Manager.GraphicRepository.Graphic[] GetUserImages(string author);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGraphicRepository/GetUserImages", ReplyAction="http://tempuri.org/IGraphicRepository/GetUserImagesResponse")]
-        System.Threading.Tasks.Task<Manager.GraphicRepository.Graphic[]> GetUserImagesAsync(int user);
+        System.Threading.Tasks.Task<Manager.GraphicRepository.Graphic[]> GetUserImagesAsync(string author);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -186,12 +186,12 @@ namespace Manager.GraphicRepository {
             return base.Channel.AddImageAsync(graphic);
         }
         
-        public Manager.GraphicRepository.Graphic GetImage(int user, string id) {
-            return base.Channel.GetImage(user, id);
+        public Manager.GraphicRepository.Graphic GetImage(string author, string id) {
+            return base.Channel.GetImage(author, id);
         }
         
-        public System.Threading.Tasks.Task<Manager.GraphicRepository.Graphic> GetImageAsync(int user, string id) {
-            return base.Channel.GetImageAsync(user, id);
+        public System.Threading.Tasks.Task<Manager.GraphicRepository.Graphic> GetImageAsync(string author, string id) {
+            return base.Channel.GetImageAsync(author, id);
         }
         
         public Manager.GraphicRepository.Graphic[] GetNewestImages(int limit) {
@@ -202,12 +202,12 @@ namespace Manager.GraphicRepository {
             return base.Channel.GetNewestImagesAsync(limit);
         }
         
-        public Manager.GraphicRepository.Graphic[] GetUserImages(int user) {
-            return base.Channel.GetUserImages(user);
+        public Manager.GraphicRepository.Graphic[] GetUserImages(string author) {
+            return base.Channel.GetUserImages(author);
         }
         
-        public System.Threading.Tasks.Task<Manager.GraphicRepository.Graphic[]> GetUserImagesAsync(int user) {
-            return base.Channel.GetUserImagesAsync(user);
+        public System.Threading.Tasks.Task<Manager.GraphicRepository.Graphic[]> GetUserImagesAsync(string author) {
+            return base.Channel.GetUserImagesAsync(author);
         }
     }
 }

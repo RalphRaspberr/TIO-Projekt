@@ -25,15 +25,15 @@ namespace Manager.Controllers
         {
             _log.addLog($"ImagesController: GET was called - GET: api/Images/?limit={limit}", LogLevel.INFO);
             var newestImages = _repo.GetNewestImages(limit);
-            foreach (var img in newestImages)
-            {
-                stats.AddStatitics(new Statistic()
-                {
-                    ImageId = img.Id,
-                    UserId = img.Author,
-                    //UserIp = Request.Headers.Host
-                });
-            }
+            //foreach (var img in newestImages)
+            //{
+            //    stats.AddStatitics(new Statistic()
+            //    {
+            //        ImageId = img.Id,
+            //        UserId = img.Author,
+            //        //UserIp = Request.Headers.Host
+            //   });
+            //}
 
             return newestImages;
         }
@@ -41,15 +41,15 @@ namespace Manager.Controllers
         // GET: api/Images/?userId=10&imageId=abc
         public Graphic GetAuthorsImage([FromUri] ImageAndItsAuthor img)
         {
-            _log.addLog($"ImagesController: GET was called - GET: api/Images/?userId={img.userId}&imageId={img.imageId}", LogLevel.INFO);
-            return _repo.GetUserImages(img.userId).First(i => i.Id == img.imageId);          
+            _log.addLog($"ImagesController: GET was called - GET: api/Images/?authorName={img.authorName}&imageId={img.imageId}", LogLevel.INFO);
+            return _repo.GetUserImages(img.authorName).First(i => i.Id == img.imageId);          
         }
 
-        // GET: api/Images/?userId=10
-        public IEnumerable<Graphic> GetAuthorImages([FromUri] int userId)
+        // GET: api/Images/?authorName=10
+        public IEnumerable<Graphic> GetAuthorImages([FromUri] string authorName)
         {
-            _log.addLog($"ImagesController: GET was called - GET: api/Images/?userId={userId}", LogLevel.INFO);
-            return _repo.GetUserImages(userId);
+            _log.addLog($"ImagesController: GET was called - GET: api/Images/?authorName={authorName}", LogLevel.INFO);
+            return _repo.GetUserImages(authorName);
         }
 
 
@@ -110,7 +110,7 @@ namespace Manager.Controllers
 
         public class ImageAndItsAuthor
         {
-            public int userId;
+            public string authorName;
             public string imageId;
         }
     }
