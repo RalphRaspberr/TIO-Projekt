@@ -6,22 +6,26 @@ using ImageService.Models;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Text.RegularExpressions;
+using System.Reflection;
 
 namespace ImageService
 {
-    [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single)]
+    [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single, IncludeExceptionDetailInFaults = true)]
     public class GraphicRepository : IGraphicRepository
     {
         public string AddImage(Graphic graphic)
         {
             byte[] authorBytes = System.Text.Encoding.UTF8.GetBytes(graphic.Author);
             string authorBase64 = System.Convert.ToBase64String(authorBytes);
-            string path = $"storage/{authorBase64}/{graphic.Id}.jpg";
+            string path = $"storage\\{authorBase64}\\{graphic.Id}.jpg";
+            string currentDirectory = System.AppDomain.CurrentDomain.BaseDirectory;
+            Directory.CreateDirectory(currentDirectory + $"\\storage");
+            Directory.CreateDirectory(currentDirectory + $"\\storage\\{authorBase64}");
 
             Image img = Image.FromStream(new MemoryStream(graphic.Bytes));
-            img.Save(path, ImageFormat.Jpeg);
+            img.Save(currentDirectory + "\\" + path, ImageFormat.Jpeg);
 
-            return path;
+            return $"storage/{authorBase64}/{graphic.Id}.jpg";
         }
 
         /// <summary>
@@ -31,16 +35,18 @@ namespace ImageService
         /// <param name="id">Image ID.</param>
         /// <returns>Graphic model.</returns>
         public Graphic GetImage(string author, string id)
-        {  
+        {
             byte[] titleBytes = System.Convert.FromBase64String(id);
             string title = System.Text.Encoding.UTF8.GetString(titleBytes);
 
             byte[] authorBytes = System.Text.Encoding.UTF8.GetBytes(author);
             string authorBase64 = System.Convert.ToBase64String(authorBytes);
 
+            string currentDirectory = System.AppDomain.CurrentDomain.BaseDirectory;
+
             string path = $"storage/{authorBase64}/{id}.jpg";
 
-            if(File.Exists(path))
+            if(File.Exists(currentDirectory + $"\\storage\\{authorBase64}\\{id}.jpg"))
             {
                 return new Graphic(author, title, id, path);
             }
@@ -51,7 +57,8 @@ namespace ImageService
         public IEnumerable<Graphic> GetNewestImages(int limit)
         {
             List<Graphic> graphics = new List<Graphic>();
-            string[] files = Directory.GetFiles(@"storage/", "*.*", SearchOption.AllDirectories);
+            string currentDirectory = System.AppDomain.CurrentDomain.BaseDirectory;
+            string[] files = Directory.GetFiles(currentDirectory + @"\storage\", "*.*", SearchOption.AllDirectories);
 
             string authorBase64;
             byte[] authorBytes;
@@ -62,9 +69,8 @@ namespace ImageService
             string title;
             foreach (string file in files)
             {
-                Match match = Regex.Match(file, @"/storage/([^/]+)/([^\.]+)$", RegexOptions.IgnoreCase);
+                Match match = Regex.Match(file, "storage\\([^/]+)\\([^\\.]+)$", RegexOptions.IgnoreCase);
 
-                // Here we check the Match instance.
                 if (match.Success)
                 {
                     authorBase64 = match.Groups[1].Value;
@@ -96,7 +102,9 @@ namespace ImageService
             byte[] authorBytes = System.Text.Encoding.UTF8.GetBytes(author);
             string authorBase64 = System.Convert.ToBase64String(authorBytes);
 
-            string[] files = Directory.GetFiles($"storage/{authorBase64}/", "*.*");
+            string currentDirectory = System.AppDomain.CurrentDomain.BaseDirectory;
+
+            string[] files = Directory.GetFiles(currentDirectory + $"\\storage\\{authorBase64}\\", "*.*");
 
             byte[] titleBytes;
             string titleBase64;
@@ -106,7 +114,7 @@ namespace ImageService
 
             foreach (string file in files)
             {
-                Match match = Regex.Match(file, $"/storage/{authorBase64}/([^\\.]+)$", RegexOptions.IgnoreCase);
+                Match match = Regex.Match(file, $"storage\\{authorBase64}\\([^\\.]+)$", RegexOptions.IgnoreCase);
 
                 if (match.Success)
                 {

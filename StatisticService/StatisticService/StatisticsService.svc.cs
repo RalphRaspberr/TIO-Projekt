@@ -13,11 +13,11 @@ namespace StatisticService
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single)]
     public class Service1 : IStatService
     {
-        private readonly StatisticRepository statisticsRepository;
+        private readonly IStatisticRepository statisticsRepository;
 
         public Service1()
         {
-            this.statisticsRepository = new StatisticRepositoryImpl();
+            this.statisticsRepository = new StatisticRepository();
         }
 
         public int AddStatitics(Statistic statistic)
