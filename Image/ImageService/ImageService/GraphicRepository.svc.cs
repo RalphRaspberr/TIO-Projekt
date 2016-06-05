@@ -18,7 +18,7 @@ namespace ImageService
             string authorBase64 = System.Convert.ToBase64String(authorBytes);
             string path = $"storage/{authorBase64}/{graphic.Id}.jpg";
 
-            Image img = Image.FromStream(graphic.ImageStream);
+            Image img = Image.FromStream(new MemoryStream(graphic.Bytes));
             img.Save(path, ImageFormat.Jpeg);
 
             return path;

@@ -46,7 +46,7 @@ namespace ImageService.Models
         /// Image object parsed from provided stream.
         /// </summary>
         [DataMember]
-        public Stream ImageStream { get; set; }
+        public byte[] Bytes { get; set; }
 
         /// <summary>
         /// Creates graphic model based on user ID, image title and stream.
@@ -56,9 +56,9 @@ namespace ImageService.Models
         /// <param name="author"></param>
         /// <param name="title"></param>
         /// <param name="stream"></param>
-        public Graphic(string author, string title, Stream stream)
+        public Graphic(string author, string title, byte[] bytes)
         {
-            this.ImageStream = stream;
+            this.Bytes = bytes;
             this.Author = author;
             this.Title = title;
             this.Id = this.generateId(title);
