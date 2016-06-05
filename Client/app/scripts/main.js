@@ -26,10 +26,10 @@ var UserArea = Vue.extend({
           <li class="dropdown" id="menuSignUp">
             <a class="dropdown-toggle" href="#" data-toggle="dropdown" id="navSignUp">Sign Up</a>
             <div class="dropdown-menu signup-modal" style="padding:17px;">
-              <form class="form" id="formSignUp">
-                <input name="username" id="username" type="text" placeholder="Username">
-                <input name="password" id="password" type="password" placeholder="Password"><br>
-                <button type="button" id="btnLogin" class="btn">Sign Up</button>
+              <form class="form" v-on:submit.prevent="register" id="formSignUp">
+                <input name="username" id="username" type="text" placeholder="Username"  v-model="userName">
+                <input name="password" id="password" type="password" placeholder="Password" v-model="password"><br>
+                <button type="submit" id="btnLogin" class="btn">Sign Up</button>
               </form>
             </div>
           </li>
@@ -37,9 +37,9 @@ var UserArea = Vue.extend({
             <a class="dropdown-toggle" href="#" data-toggle="dropdown" id="navLogin">Login</a>
             <div class="dropdown-menu login-modal" style="padding:17px;">
               <form class="form" id="formLogin">
-                <input name="username" id="username" type="text" placeholder="Username">
-                <input name="password" id="password" type="password" placeholder="Password"><br>
-                <button type="button" id="btnLogin" class="btn">Login</button>
+                <input name="username" id="username" type="text" placeholder="Username" v-model="userName">
+                <input name="password" id="password" type="password" placeholder="Password" v-model="password"><br>
+                <button type="submit" id="btnLogin" class="btn">Login</button>
               </form>
             </div>
           </li>
@@ -56,14 +56,22 @@ var UserArea = Vue.extend({
   `,
   data: function() {
     return {
-      name: 'Adusia',
-      userProfile: '#'
+      userName: '',
+      password: ''
     }
   },
   methods: {
-    displayName: function(){
-
+    register: function(){
+      this.registerResource.save({}, {
+        Email: this.userName + '@leczo.io',
+        Password: this.password,
+        ConfirmPassword: this.password
+      });
+      console.log(this.userName, this.password);
     }
+  },
+  ready: function(){
+    this.registerResource = this.$resource('api/Account');
   }
 });
 
