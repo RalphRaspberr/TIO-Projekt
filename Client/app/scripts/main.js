@@ -1,7 +1,7 @@
 'use strict';
 
 var ImageViews = Vue.extend({
-  template: `<p class="image-views">{{ views }}</p>`,
+  template: `<p class="image-views"><small>Views: {{ views }}</small></p>`,
   props: [
     'user-name',
     'image-id'
@@ -73,7 +73,7 @@ var UserArea = Vue.extend({
           <button type="submit" class="btn btnLogout" v-on:click="logout">Logout</button>
         </li>
         <li>
-          <button type="submit" class="usun-konto" v-on:click="removeAccount">USUŃ KONTO ( ͡° ͜ʖ ͡°)</button
+          <a class="usun-konto" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">USUŃ KONTO ( ͡° ͜ʖ ͡°)</a>
         </li>
         <li>
           <a href="{{ userProfile }}" data-toggle="dropdown" id="navSignUp">{{ name }}</a>
@@ -98,7 +98,6 @@ var UserArea = Vue.extend({
         ConfirmPassword: this.password
       }).then(function(){
         this.login();
-
       });
       console.log(this.userName, this.password);
     },
@@ -132,9 +131,9 @@ var UserArea = Vue.extend({
       formData.append('Picture', this.$els.picture.files[0]);
       formData.append('Title', this.title);
       formData.append('Author', this.userName);
-      this.imageResource.save({}, formData);
-
-
+      this.imageResource.save({}, formData).then(function() {
+        window.location.reload();
+      });
     }
   },
   ready: function(){
@@ -146,7 +145,6 @@ var UserArea = Vue.extend({
       Vue.http.headers.common['Authorization'] = `Bearer ${token}`;
       this.$set('loggedin', true);
       this.$set('userName', sessionStorage.getItem('userName'));
-      console.log(this.userName);
     }
   }
 });
@@ -167,7 +165,7 @@ var ImageFeed = Vue.extend({
   methods: {
     getImages: function(){
       this.imageResource.get().then(function (response) {
-           console.log(response.data);
+          //  console.log(response.data);
            this.$set('images', response.data);
       });
     },
@@ -183,14 +181,19 @@ var ImageFeed = Vue.extend({
         // this.imageResource.get({userId: userId, imageId: imageId}).then(function (response) {
         this.imageResource.get({userName: userName, imageId: imageId}).then(function (response) {
             //  this.$set('images', response);
-            console.log(response.data);
+            // console.log(response.data);
         });
       }
     },
     // addImage: function(image, title, userId){
     addImage: function(image, title, userName){
-      this.imageResource.save({userId: userName}, {image: image, title: title});
-      ImageFeed.trigger('reload');
+      this.imageResource.save({userId: userName}, {image: image, title: title})
+      .then(function(){
+        console.log('dupa jasia');
+        location.reload(true);
+
+      });
+      // ImageFeed.trigger('reload');
     }
   },
   ready: function(){
