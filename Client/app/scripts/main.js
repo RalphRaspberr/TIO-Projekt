@@ -114,7 +114,11 @@ var UserArea = Vue.extend({
       Vue.http.options.emulateJSON = false;
     },
     removeAccount: function(){
-      this.accountResource.save({},{});
+      this.accountResource.remove({accountAction: 'UsunKonto'}, {
+        Email: this.userName + '@leczo.io',
+        Password: this.password,
+        ConfirmPassword: this.password
+      });
     },
     logout: function(){
        sessionStorage.removeItem('token');
@@ -150,26 +154,7 @@ var ImageFeed = Vue.extend({
   `,
   data: function(){
     return {
-      images: [
-        {
-          src: "https://placekitten.com/g/200/300",
-          title: "#kicius",
-          author: "Adusia",
-          authorId: 123,
-          authorProfile: "#",
-          imageId: 244,
-          views: 4
-        },
-        {
-          src: "https://placekitten.com/g/200/200",
-          title: "#kicius",
-          author: "Adusia",
-          authorId: 123,
-          authorProfile: "#",
-          imageId: 2435,
-          views: 4
-        }
-      ]
+      images: []
     }
   },
   methods: {
