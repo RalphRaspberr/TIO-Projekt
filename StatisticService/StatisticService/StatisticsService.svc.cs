@@ -20,19 +20,21 @@ namespace StatisticService
             this.statisticsRepository = new StatisticRepository();
         }
 
+
+
         public int AddStatitics(Statistic statistic)
         {
             return this.statisticsRepository.Add(statistic);
         }
 
-        public List<Statistic> GetAllImageViewStatistics(String id)
+        public IEnumerable<Statistic> FindImageStats(string imageId, string authorName)
         {
-            return this.statisticsRepository.findAllByImageId(id);
+            return this.statisticsRepository.FindImageStats(imageId, authorName);
         }
 
-        public List<Statistic> GetAllViewStatistics()
+        public List<Statistic> FindAll()
         {
-            return this.statisticsRepository.findAll();
+            return this.statisticsRepository.FindAll();
         }
 
     }

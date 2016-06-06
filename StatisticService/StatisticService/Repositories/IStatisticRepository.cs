@@ -8,16 +8,13 @@ using StatisticService.Model;
 
 namespace StatisticService.Repositories
 {
-    [ServiceContract]
     public interface IStatisticRepository
     {
-        [OperationContract]
-        List<Statistic> findAll();
-
-        [OperationContract]
-        List<Statistic> findAllByImageId(String id);
-
-        [OperationContract]
         int Add(Statistic statistic);
+
+        List<Statistic> FindAll();
+
+        IEnumerable<Statistic> FindImageStats(String imageId, String authorName);
+
     }
 }

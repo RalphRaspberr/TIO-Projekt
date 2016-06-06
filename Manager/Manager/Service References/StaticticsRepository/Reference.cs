@@ -23,6 +23,9 @@ namespace Manager.StaticticsRepository {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string AuthorField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int IdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -38,6 +41,19 @@ namespace Manager.StaticticsRepository {
             }
             set {
                 this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Author {
+            get {
+                return this.AuthorField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.AuthorField, value) != true)) {
+                    this.AuthorField = value;
+                    this.RaisePropertyChanged("Author");
+                }
             }
         }
         
@@ -100,17 +116,17 @@ namespace Manager.StaticticsRepository {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStatService/AddStatitics", ReplyAction="http://tempuri.org/IStatService/AddStatiticsResponse")]
         System.Threading.Tasks.Task<int> AddStatiticsAsync(Manager.StaticticsRepository.Statistic statistic);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStatService/GetAllImageViewStatistics", ReplyAction="http://tempuri.org/IStatService/GetAllImageViewStatisticsResponse")]
-        Manager.StaticticsRepository.Statistic[] GetAllImageViewStatistics(string id);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStatService/FindImageStats", ReplyAction="http://tempuri.org/IStatService/FindImageStatsResponse")]
+        Manager.StaticticsRepository.Statistic[] FindImageStats(string imageId, string authorName);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStatService/GetAllImageViewStatistics", ReplyAction="http://tempuri.org/IStatService/GetAllImageViewStatisticsResponse")]
-        System.Threading.Tasks.Task<Manager.StaticticsRepository.Statistic[]> GetAllImageViewStatisticsAsync(string id);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStatService/FindImageStats", ReplyAction="http://tempuri.org/IStatService/FindImageStatsResponse")]
+        System.Threading.Tasks.Task<Manager.StaticticsRepository.Statistic[]> FindImageStatsAsync(string imageId, string authorName);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStatService/GetAllViewStatistics", ReplyAction="http://tempuri.org/IStatService/GetAllViewStatisticsResponse")]
-        Manager.StaticticsRepository.Statistic[] GetAllViewStatistics();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStatService/FindAll", ReplyAction="http://tempuri.org/IStatService/FindAllResponse")]
+        Manager.StaticticsRepository.Statistic[] FindAll();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStatService/GetAllViewStatistics", ReplyAction="http://tempuri.org/IStatService/GetAllViewStatisticsResponse")]
-        System.Threading.Tasks.Task<Manager.StaticticsRepository.Statistic[]> GetAllViewStatisticsAsync();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IStatService/FindAll", ReplyAction="http://tempuri.org/IStatService/FindAllResponse")]
+        System.Threading.Tasks.Task<Manager.StaticticsRepository.Statistic[]> FindAllAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -148,20 +164,20 @@ namespace Manager.StaticticsRepository {
             return base.Channel.AddStatiticsAsync(statistic);
         }
         
-        public Manager.StaticticsRepository.Statistic[] GetAllImageViewStatistics(string id) {
-            return base.Channel.GetAllImageViewStatistics(id);
+        public Manager.StaticticsRepository.Statistic[] FindImageStats(string imageId, string authorName) {
+            return base.Channel.FindImageStats(imageId, authorName);
         }
         
-        public System.Threading.Tasks.Task<Manager.StaticticsRepository.Statistic[]> GetAllImageViewStatisticsAsync(string id) {
-            return base.Channel.GetAllImageViewStatisticsAsync(id);
+        public System.Threading.Tasks.Task<Manager.StaticticsRepository.Statistic[]> FindImageStatsAsync(string imageId, string authorName) {
+            return base.Channel.FindImageStatsAsync(imageId, authorName);
         }
         
-        public Manager.StaticticsRepository.Statistic[] GetAllViewStatistics() {
-            return base.Channel.GetAllViewStatistics();
+        public Manager.StaticticsRepository.Statistic[] FindAll() {
+            return base.Channel.FindAll();
         }
         
-        public System.Threading.Tasks.Task<Manager.StaticticsRepository.Statistic[]> GetAllViewStatisticsAsync() {
-            return base.Channel.GetAllViewStatisticsAsync();
+        public System.Threading.Tasks.Task<Manager.StaticticsRepository.Statistic[]> FindAllAsync() {
+            return base.Channel.FindAllAsync();
         }
     }
 }

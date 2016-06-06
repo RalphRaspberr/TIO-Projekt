@@ -15,29 +15,30 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetAllImageViewStatistics">
+  <xs:element name="FindImageStats">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="id" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="imageId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="authorName" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetAllImageViewStatisticsResponse">
+  <xs:element name="FindImageStatsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/StatisticService.Model" minOccurs="0" name="GetAllImageViewStatisticsResult" nillable="true" type="q2:ArrayOfStatistic" />
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/StatisticService.Model" minOccurs="0" name="FindImageStatsResult" nillable="true" type="q2:ArrayOfStatistic" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetAllViewStatistics">
+  <xs:element name="FindAll">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetAllViewStatisticsResponse">
+  <xs:element name="FindAllResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/StatisticService.Model" minOccurs="0" name="GetAllViewStatisticsResult" nillable="true" type="q3:ArrayOfStatistic" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/StatisticService.Model" minOccurs="0" name="FindAllResult" nillable="true" type="q3:ArrayOfStatistic" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

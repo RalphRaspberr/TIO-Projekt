@@ -8,10 +8,9 @@ using StatisticService.Model;
 
 namespace StatisticService.Repositories
 {
-    [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerCall)]
     public class StatisticRepository : IStatisticRepository
     {
-        private readonly string DatabasePath = "C:\\statistics";
+        private readonly string DatabasePath = System.AppDomain.CurrentDomain.BaseDirectory+@"\statistics";
 
         internal StatisticDB ConvertStatisticToStatisticDB(Statistic statistic)
         {
@@ -21,7 +20,8 @@ namespace StatisticService.Repositories
             {
                 Id = statistic.Id,
                 ImageId = statistic.ImageId,
-                ViewDate = statistic.ViewDate
+                ViewDate = statistic.ViewDate,
+                Author = statistic.Author             
             };
         }
 
@@ -33,7 +33,8 @@ namespace StatisticService.Repositories
             {
                 Id = statisticDb.Id,
                 ImageId = statisticDb.ImageId,
-                ViewDate = statisticDb.ViewDate
+                ViewDate = statisticDb.ViewDate,
+                Author = statisticDb.Author
             };
         }
 
@@ -46,8 +47,8 @@ namespace StatisticService.Repositories
                 return repository.Insert(statisticDB);
             }
         }
-
-        public List<Statistic> findAll()
+        
+        public List<Statistic> FindAll()
         {
             using (var database = new LiteDatabase(this.DatabasePath))
             {
@@ -57,13 +58,14 @@ namespace StatisticService.Repositories
             }
         }
 
-        public List<Statistic> findAllByImageId(String imageId)
+        public IEnumerable<Statistic> FindImageStats(string imageId, string authorName)
         {
             using (var database = new LiteDatabase(this.DatabasePath))
             {
                 var repository = database.GetCollection<StatisticDB>("statistics");
-                var allStatistics = findAll();
-                return allStatistics.Where(x => x.ImageId.Equals(imageId)).ToList();
+                var allStatistics = FindAll();
+                return allStatistics.Where(x => x.ImageId.Equals(imageId) 
+                                            && x.Author.Equals(authorName));
             }
         }
     }
