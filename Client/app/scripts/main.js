@@ -1,17 +1,26 @@
 var ImageViews = Vue.extend({
+  template: `<p class="image-views">{{ views }}</p>`,
   props: [
-    'user-id',
+    'user-name',
     'image-id'
   ],
+  data: function(){
+    return {
+      views: 0
+    }
+  },
   methods: {
     getViews: function(){
-      this.viewResource.get().then(function (response) {
-          //  this.$set('images', response);
+      this.viewResource.get({userName: this.userName, imageId: this.imageId}).then(function (response) {
+           this.$set('views', response.data);
+           console.log(response.data);
       });
     }
   },
   ready: function(){
-    this.viewResource = this.$resource('stats{/userId}{/imageId}');
+    console.log('dupa');
+    this.viewResource = this.$resource('stats{/userName}{/imageId}');
+    this.getViews();
   }
 });
 
@@ -198,11 +207,11 @@ var ImageFeed = Vue.extend({
 var ImageCard = Vue.extend({
   template: `
   <div class="thumbnail">
-    <img v-bind:src="image.src">
+    <img v-bind:src="'http://localhost:52267/' + image.Path">
     <div class="caption">
-      <h3>{{ image.title }}</h3>
-      <p><a v-bind:href="image.profile">{{ image.author }}</a></p>
-      <image-views user-id="{{ image.authorId }}" image-id="{{ image.imageId }}"></image-views>
+      <h3>{{ image.Title }}</h3>
+      <p><a v-bind:href="image.profile">{{ image.Author }}</a></p>
+      <image-views v-bind:user-name="image.Author" v-bind:image-id="image.Id"></image-views>
     </div>
   </div>
   `,
