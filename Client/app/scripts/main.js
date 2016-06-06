@@ -136,8 +136,6 @@ var UserArea = Vue.extend({
       formData.append('Title', this.title);
       formData.append('Author', this.userName);
       this.imageResource.save({}, formData);
-
-
     }
   },
   ready: function(){
