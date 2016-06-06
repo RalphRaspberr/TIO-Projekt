@@ -1,17 +1,26 @@
 var ImageViews = Vue.extend({
+  template: `<p class="image-views">{{ views }}</p>`,
   props: [
-    'user-id',
+    'user-name',
     'image-id'
   ],
+  data: function(){
+    return {
+      views: 0
+    }
+  },
   methods: {
     getViews: function(){
-      this.viewResource.get().then(function (response) {
-          //  this.$set('images', response);
+      this.viewResource.get({userName: this.userName, imageId: this.imageId}).then(function (response) {
+           this.$set('views', response.data);
+           console.log(response.data);
       });
     }
   },
   ready: function(){
-    this.viewResource = this.$resource('stats{/userId}{/imageId}');
+    console.log('dupa');
+    this.viewResource = this.$resource('stats{/userName}{/imageId}');
+    this.getViews();
   }
 });
 
@@ -105,7 +114,11 @@ var UserArea = Vue.extend({
       Vue.http.options.emulateJSON = false;
     },
     removeAccount: function(){
-      this.accountResource.save({},{});
+      this.accountResource.remove({accountAction: 'UsunKonto'}, {
+        Email: this.userName + '@leczo.io',
+        Password: this.password,
+        ConfirmPassword: this.password
+      });
     },
     logout: function(){
        sessionStorage.removeItem('token');
@@ -141,62 +154,49 @@ var ImageFeed = Vue.extend({
   `,
   data: function(){
     return {
-      images: [
-        {
-          src: "https://placekitten.com/g/200/300",
-          title: "#kicius",
-          author: "Adusia",
-          authorId: 123,
-          authorProfile: "#",
-          imageId: 244,
-          views: 4
-        },
-        {
-          src: "https://placekitten.com/g/200/200",
-          title: "#kicius",
-          author: "Adusia",
-          authorId: 123,
-          authorProfile: "#",
-          imageId: 2435,
-          views: 4
-        }
-      ]
+      images: []
     }
   },
   methods: {
     getImages: function(){
       this.imageResource.get().then(function (response) {
-            console.log(response.data);
+           console.log(response.data);
            this.$set('images', response.data);
       });
     },
-    getUserImages: function(userId) {
-      this.imageResource.get({userId: userId}).then(function (response) {
-          //  this.$set('images', response);
+    getUserImages: function(userName) {
+      // this.imageResource.get({userId: userId}).then(function (response) {
+         this.imageResource.get({userName: userName}).then(function (response) {
+           console.log(response.data);
+           this.$set('images', response.data);
       });
     },
-    getImage: function(userId, imageId){
-      this.imageResource.get({userId: userId, imageId: imageId}).then(function (response) {
+    getImage: function(userName, imageId){
+      // this.imageResource.get({userId: userId, imageId: imageId}).then(function (response) {
+      this.imageResource.get({userName: userName, imageId: imageId}).then(function (response) {
           //  this.$set('images', response);
+          console.log(response.data);
       });
     },
-    addImage: function(image, title, userId){
-      this.imageResource.save({userId: userId}, {image: image, title: title});
+    // addImage: function(image, title, userId){
+    addImage: function(image, title, userName){
+      this.imageResource.save({userId: userName}, {image: image, title: title});
     }
   },
   ready: function(){
-    this.imageResource = this.$resource('http://localhost:57146/image{/userId}{/imageId}');
+    this.imageResource = this.$resource('http://localhost:57146/api/Images{/userName}{/imageId}');
+    this.getImages();
   }
 });
 
 var ImageCard = Vue.extend({
   template: `
   <div class="thumbnail">
-    <img v-bind:src="image.src">
+    <img v-bind:src="'http://localhost:52267/' + image.Path">
     <div class="caption">
-      <h3>{{ image.title }}</h3>
-      <p><a v-bind:href="image.profile">{{ image.author }}</a></p>
-      <image-views user-id="{{ image.authorId }}" image-id="{{ image.imageId }}"></image-views>
+      <h3>{{ image.Title }}</h3>
+      <p><a v-bind:href="image.profile">{{ image.Author }}</a></p>
+      <image-views v-bind:user-name="image.Author" v-bind:image-id="image.Id"></image-views>
     </div>
   </div>
   `,

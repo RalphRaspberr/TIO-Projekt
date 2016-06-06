@@ -58,7 +58,7 @@ namespace ImageService
         {
             List<Graphic> graphics = new List<Graphic>();
             string currentDirectory = System.AppDomain.CurrentDomain.BaseDirectory;
-            string[] files = Directory.GetFiles(currentDirectory + @"\storage\", "*.*", SearchOption.AllDirectories);
+            string[] files = Directory.GetFiles(currentDirectory + @"storage\", "*.*", SearchOption.AllDirectories);
             string authorBase64;
             byte[] authorBytes;
             string author;
