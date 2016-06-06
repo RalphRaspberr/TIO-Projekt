@@ -20,9 +20,6 @@ body {
   list-style: none;
 }
 
-.usun-konto a{
-  text-decoration: none;
-}
 .thumbnail{
   margin: 20px auto;
   max-width: 500px;
@@ -36,15 +33,6 @@ body {
   p{
     text-align: right;
   }
-}
-
-.usun-konto{
-  background-color: #C62828;
-  color: #fff;
-  height: 55px;
-  // border-radius: 15px;
-  padding: 10px;
-  border: none;
 }
 
 .btnLogout{
