@@ -166,26 +166,31 @@ var ImageFeed = Vue.extend({
   methods: {
     getImages: function(){
       this.imageResource.get().then(function (response) {
-            console.log(response.data);
+           console.log(response.data);
            this.$set('images', response.data);
       });
     },
-    getUserImages: function(userId) {
-      this.imageResource.get({userId: userId}).then(function (response) {
-          //  this.$set('images', response);
+    getUserImages: function(userName) {
+      // this.imageResource.get({userId: userId}).then(function (response) {
+         this.imageResource.get({userName: userName}).then(function (response) {
+           console.log(response.data);
+           this.$set('images', response.data);
       });
     },
-    getImage: function(userId, imageId){
-      this.imageResource.get({userId: userId, imageId: imageId}).then(function (response) {
+    getImage: function(userName, imageId){
+      // this.imageResource.get({userId: userId, imageId: imageId}).then(function (response) {
+      this.imageResource.get({userName: userName, imageId: imageId}).then(function (response) {
           //  this.$set('images', response);
+          console.log(response.data);
       });
     },
-    addImage: function(image, title, userId){
-      this.imageResource.save({userId: userId}, {image: image, title: title});
+    // addImage: function(image, title, userId){
+    addImage: function(image, title, userName){
+      this.imageResource.save({userId: userName}, {image: image, title: title});
     }
   },
   ready: function(){
-    this.imageResource = this.$resource('http://localhost:57146/image{/userId}{/imageId}');
+    this.imageResource = this.$resource('http://localhost:57146/api/Images{/userName}{/imageId}');
     this.getImages();
   }
 });
