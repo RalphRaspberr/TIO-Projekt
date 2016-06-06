@@ -1,3 +1,5 @@
+'use strict';
+
 var ImageViews = Vue.extend({
   template: `<p class="image-views">{{ views }}</p>`,
   props: [
@@ -7,7 +9,7 @@ var ImageViews = Vue.extend({
   data: function(){
     return {
       views: 0
-    }
+    };
   },
   methods: {
     getViews: function(){
@@ -19,7 +21,7 @@ var ImageViews = Vue.extend({
   },
   ready: function(){
     console.log('dupa');
-    this.viewResource = this.$resource('stats{/userName}{/imageId}');
+    this.viewResource = this.$resource('http://localhost:57146/api/Statistics{/userName}{/imageId}');
     this.getViews();
   }
 });
@@ -86,7 +88,7 @@ var UserArea = Vue.extend({
       password: '',
       loggedin: false,
       title: ''
-    }
+    };
   },
   methods: {
     register: function(){
@@ -110,6 +112,7 @@ var UserArea = Vue.extend({
         Vue.http.headers.common['Authorization'] = `Bearer ${response.data.access_token}`;
         sessionStorage.setItem('token', response.data.access_token);
         this.$set('loggedin', true);
+        sessionStorage.setItem('userName', this.userName);
       });
       Vue.http.options.emulateJSON = false;
     },
@@ -140,6 +143,8 @@ var UserArea = Vue.extend({
     if(token){
       Vue.http.headers.common['Authorization'] = `Bearer ${token}`;
       this.$set('loggedin', true);
+      this.$set('userName', sessionStorage.getItem('userName'));
+      console.log(this.userName);
     }
   }
 });
@@ -155,7 +160,7 @@ var ImageFeed = Vue.extend({
   data: function(){
     return {
       images: []
-    }
+    };
   },
   methods: {
     getImages: function(){
@@ -172,11 +177,13 @@ var ImageFeed = Vue.extend({
       });
     },
     getImage: function(userName, imageId){
-      // this.imageResource.get({userId: userId, imageId: imageId}).then(function (response) {
-      this.imageResource.get({userName: userName, imageId: imageId}).then(function (response) {
-          //  this.$set('images', response);
-          console.log(response.data);
-      });
+      if(userName && imageId) {
+        // this.imageResource.get({userId: userId, imageId: imageId}).then(function (response) {
+        this.imageResource.get({userName: userName, imageId: imageId}).then(function (response) {
+            //  this.$set('images', response);
+            console.log(response.data);
+        });
+      }
     },
     // addImage: function(image, title, userId){
     addImage: function(image, title, userName){
