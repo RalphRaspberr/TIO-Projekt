@@ -6,6 +6,8 @@
 *.user
 *.userosscache
 *.sln.docstates
+*.StatisticService/StatisticService/statistics
+*.LogService/LogService/logs/logFile.txt
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
@@ -146,7 +148,7 @@ publish/
 *.[Pp]ublish.xml
 *.azurePubxml
 
-# TODO: Un-comment the next line if you do not want to checkin 
+# TODO: Un-comment the next line if you do not want to checkin
 # your web deploy settings because they may include unencrypted
 # passwords
 #*.pubxml

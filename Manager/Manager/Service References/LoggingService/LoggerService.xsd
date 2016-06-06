@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/LogService" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/LogService" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:simpleType name="LogLevel">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="FATAL" />
+      <xs:enumeration value="ERROR" />
+      <xs:enumeration value="WARN" />
+      <xs:enumeration value="INFO" />
+      <xs:enumeration value="DEBUG" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="LogLevel" nillable="true" type="tns:LogLevel" />
+</xs:schema>

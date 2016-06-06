@@ -297,6 +297,7 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <None Include="Service References\LoggingService\LoggerService.disco" />
     <None Include="Service References\LoggingService\configuration91.svcinfo" />
     <None Include="Service References\LoggingService\configuration.svcinfo" />
     <None Include="Service References\LoggingService\Reference.svcmap">
@@ -307,6 +308,15 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <None Include="Service References\LoggingService\LoggerService.wsdl" />
+    <None Include="Service References\LoggingService\LoggerService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\LoggingService\LoggerService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\LoggingService\LoggerService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\StaticticsRepository\Service1.wsdl" />
     <None Include="Service References\StaticticsRepository\StatisticsService.disco" />
     <None Include="Service References\StaticticsRepository\configuration91.svcinfo" />
