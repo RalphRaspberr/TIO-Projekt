@@ -17,7 +17,7 @@ a.brand-name {
   display: inline-block;
   a {
     color: #000;
-    line-height: 33px;
+    line-height: 27px;
     height: 55px;
   }
 }
@@ -42,5 +42,19 @@ a.brand-name {
 .signup-modal {
   form input {
     margin: 5px;
+  }
+}
+
+.usun-konto{
+  text-decoration: none;
+  background-color: #C62828;
+  color: #fff !important;
+  height: 55px;
+  // border-radius: 15px;
+  padding: 10px;
+  border: none;
+
+  &:hover {
+    color: #333 !important;
   }
 }

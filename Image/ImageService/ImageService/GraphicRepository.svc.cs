@@ -7,6 +7,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Text.RegularExpressions;
 using System.Reflection;
+using System.Linq;
 
 namespace ImageService
 {
@@ -58,7 +59,8 @@ namespace ImageService
         {
             List<Graphic> graphics = new List<Graphic>();
             string currentDirectory = System.AppDomain.CurrentDomain.BaseDirectory;
-            string[] files = Directory.GetFiles(currentDirectory + @"storage\", "*.*", SearchOption.AllDirectories);
+            FileInfo[] files = Directory.GetFiles(currentDirectory + @"storage\", "*.*", SearchOption.AllDirectories)
+                .Select(x => new FileInfo(x)).OrderByDescending(x => x.LastWriteTime).ToArray();
             string authorBase64;
             byte[] authorBytes;
             string author;
@@ -66,10 +68,10 @@ namespace ImageService
             string titleBase64;
             byte[] titleBytes;
             string title;
-            foreach (string file in files)
+            foreach (FileInfo file in files)
             {
-                authorBase64 = Path.GetFileName(Path.GetDirectoryName(file));
-                titleBase64 = Path.GetFileNameWithoutExtension(file);
+                authorBase64 = Path.GetFileName(file.DirectoryName);
+                titleBase64 = Path.GetFileNameWithoutExtension(file.Name);
 
                 authorBytes = System.Convert.FromBase64String(authorBase64);
                 author = System.Text.Encoding.UTF8.GetString(authorBytes);

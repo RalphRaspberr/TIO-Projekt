@@ -1,7 +1,7 @@
 'use strict';
 
 var ImageViews = Vue.extend({
-  template: `<p class="image-views">{{ views }}</p>`,
+  template: `<p class="image-views"><small>Views: {{ views }}</small></p>`,
   props: [
     'user-name',
     'image-id'
@@ -73,10 +73,7 @@ var UserArea = Vue.extend({
           <button type="submit" class="btn btnLogout" v-on:click="logout">Logout</button>
         </li>
         <li>
-            <button type="submit" class="usun-konto" v-on:click="">
-            <a  href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" >  USUŃ KONTO ( ͡° ͜ʖ ͡°)</a>
-          </button>
-          </a>
+          <a class="usun-konto" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">USUŃ KONTO ( ͡° ͜ʖ ͡°)</a>
         </li>
         <li>
           <a href="{{ userProfile }}" data-toggle="dropdown" id="navSignUp">{{ name }}</a>
@@ -101,7 +98,6 @@ var UserArea = Vue.extend({
         ConfirmPassword: this.password
       }).then(function(){
         this.login();
-
       });
       console.log(this.userName, this.password);
     },
@@ -135,7 +131,9 @@ var UserArea = Vue.extend({
       formData.append('Picture', this.$els.picture.files[0]);
       formData.append('Title', this.title);
       formData.append('Author', this.userName);
-      this.imageResource.save({}, formData);
+      this.imageResource.save({}, formData).then(function() {
+        window.location.reload();
+      });
     }
   },
   ready: function(){
@@ -147,7 +145,6 @@ var UserArea = Vue.extend({
       Vue.http.headers.common['Authorization'] = `Bearer ${token}`;
       this.$set('loggedin', true);
       this.$set('userName', sessionStorage.getItem('userName'));
-      console.log(this.userName);
     }
   }
 });
