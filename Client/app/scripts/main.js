@@ -186,6 +186,7 @@ var ImageFeed = Vue.extend({
   },
   ready: function(){
     this.imageResource = this.$resource('http://localhost:57146/image{/userId}{/imageId}');
+    this.getImages();
   }
 });
 
