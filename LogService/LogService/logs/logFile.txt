@@ -30,3 +30,17 @@
 2016-06-05 23:19:42.2953|INFO|LogService.LoggerService|ImagesController: GET was called - GET: api/Images/?limit=1
 2016-06-05 23:19:46.3379|INFO|LogService.LoggerService|ImagesController: GET was called - GET: api/Images/?limit=10
 2016-06-05 23:19:53.8676|INFO|LogService.LoggerService|ImagesController: GET was called - GET: api/Images/?authorName=&imageId=
+2016-06-05 23:23:37.8441|INFO|LogService.LoggerService|ImagesController: added image: Title = dupeczka, Author =  
+2016-06-05 23:24:15.7526|INFO|LogService.LoggerService|ImagesController: GET was called - GET: api/Images/?authorName=&imageId=
+2016-06-05 23:24:52.5624|INFO|LogService.LoggerService|ImagesController: GET was called - GET: api/Images/?limit=10
+2016-06-05 23:48:15.5167|INFO|LogService.LoggerService|ImagesController: GET was called - GET: api/Images/?authorName=&imageId=
+2016-06-05 23:48:57.8300|INFO|LogService.LoggerService|ImagesController: GET was called - GET: api/Images/?limit=10
+2016-06-05 23:49:30.9984|INFO|LogService.LoggerService|ImagesController: GET was called - GET: api/Images/?limit=10
+2016-06-05 23:49:39.8087|INFO|LogService.LoggerService|ImagesController: GET was called - GET: api/Images/?authorName=&imageId=
+2016-06-05 23:49:48.1042|INFO|LogService.LoggerService|ImagesController: GET was called - GET: api/Images/?limit=10
+2016-06-05 23:51:04.7326|INFO|LogService.LoggerService|ImagesController: GET was called - GET: api/Images/?limit=10
+2016-06-05 23:53:45.7091|INFO|LogService.LoggerService|ImagesController: GET was called - GET: api/Images/?limit=10
+2016-06-05 23:54:19.0895|INFO|LogService.LoggerService|ImagesController: GET was called - GET: api/Images/?limit=10
+2016-06-05 23:54:53.8888|INFO|LogService.LoggerService|ImagesController: GET was called - GET: api/Images/?limit=10
+2016-06-05 23:57:46.3347|INFO|LogService.LoggerService|ImagesController: GET was called - GET: api/Images/?limit=10
+2016-06-05 23:59:17.7397|INFO|LogService.LoggerService|ImagesController: GET was called - GET: api/Images/?limit=10
