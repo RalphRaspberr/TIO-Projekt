@@ -71,7 +71,7 @@ var UserArea = Vue.extend({
           <button type="submit" class="btn btnLogout" v-on:click="logout">Logout</button>
         </li>
         <li>
-          <button type="submit" class="usun-konto" v-on:click="">USUŃ KONTO ( ͡° ͜ʖ ͡°)</button
+          <button type="submit" class="usun-konto" v-on:click="removeAccount">USUŃ KONTO ( ͡° ͜ʖ ͡°)</button
         </li>
         <li>
           <a href="{{ userProfile }}" data-toggle="dropdown" id="navSignUp">{{ name }}</a>
@@ -130,6 +130,8 @@ var UserArea = Vue.extend({
       formData.append('Title', this.title);
       formData.append('Author', this.userName);
       this.imageResource.save({}, formData);
+
+
     }
   },
   ready: function(){
@@ -181,6 +183,7 @@ var ImageFeed = Vue.extend({
     // addImage: function(image, title, userId){
     addImage: function(image, title, userName){
       this.imageResource.save({userId: userName}, {image: image, title: title});
+      ImageFeed.trigger('reload');
     }
   },
   ready: function(){
