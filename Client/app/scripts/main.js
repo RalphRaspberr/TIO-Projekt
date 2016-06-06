@@ -117,7 +117,7 @@ var UserArea = Vue.extend({
       Vue.http.options.emulateJSON = false;
     },
     removeAccount: function(){
-      this.accountResource.remove({accountAction: 'UsunKonto'}, {
+      this.accountResource.save({accountAction: 'UsunKonto'}, {
         Email: this.userName + '@leczo.io',
         Password: this.password,
         ConfirmPassword: this.password
