@@ -73,7 +73,10 @@ var UserArea = Vue.extend({
           <button type="submit" class="btn btnLogout" v-on:click="logout">Logout</button>
         </li>
         <li>
-          <button type="submit" class="usun-konto" v-on:click="removeAccount">USUŃ KONTO ( ͡° ͜ʖ ͡°)</button
+            <button type="submit" class="usun-konto" v-on:click="">
+            <a  href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" >  USUŃ KONTO ( ͡° ͜ʖ ͡°)</a>
+          </button>
+          </a>
         </li>
         <li>
           <a href="{{ userProfile }}" data-toggle="dropdown" id="navSignUp">{{ name }}</a>
@@ -167,7 +170,7 @@ var ImageFeed = Vue.extend({
   methods: {
     getImages: function(){
       this.imageResource.get().then(function (response) {
-           console.log(response.data);
+          //  console.log(response.data);
            this.$set('images', response.data);
       });
     },
@@ -183,14 +186,19 @@ var ImageFeed = Vue.extend({
         // this.imageResource.get({userId: userId, imageId: imageId}).then(function (response) {
         this.imageResource.get({userName: userName, imageId: imageId}).then(function (response) {
             //  this.$set('images', response);
-            console.log(response.data);
+            // console.log(response.data);
         });
       }
     },
     // addImage: function(image, title, userId){
     addImage: function(image, title, userName){
-      this.imageResource.save({userId: userName}, {image: image, title: title});
-      ImageFeed.trigger('reload');
+      this.imageResource.save({userId: userName}, {image: image, title: title})
+      .then(function(){
+        console.log('dupa jasia');
+        location.reload(true);
+
+      });
+      // ImageFeed.trigger('reload');
     }
   },
   ready: function(){
