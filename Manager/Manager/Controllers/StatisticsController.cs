@@ -13,9 +13,8 @@ namespace Manager.Controllers
     {
         private StatServiceClient _stats = new StatServiceClient();
 
-        // GET: api/Statistics/?userName=Ada&imageId=imageAdy
+        // GET: api/Ada/imageAdy
         [HttpGet]
-        [Route]
         [Route("{authorName}/{imageId}")]
         public int Get(string authorName, string imageId)
         {
